@@ -5,7 +5,7 @@
 # curl -fsSL https://raw.githubusercontent.com/PowerShellHERO/dotfiles/refs/heads/main/00_apt_core.sh | sudo bash
 #
 
-set -e
+set -euo pipefail
 
 # 管理者権限が必要な作業
 ## sudo で実行されているかチェック
@@ -17,20 +17,23 @@ if [ "$EUID" -ne 0 ]; then
     exit 1
 fi
 
+export DEBIAN_FRONTEND=noninteractive
+apt update
+apt upgrade -y
+apt install -y git python3 zsh
+  
+mkdir -p ~/download && cd ~/download
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
 
-apt update && apt upgrade -y
-apt install git python3 zsh -y
+rm -rf /opt/nvim-linux-x86_64
+tar -C /opt -xzf nvim-linux-x86_64.tar.gz
+ln -sf /opt/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
 
-## mkdir -p ~/download && cd ~/download
-## curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
-## 
-## rm -rf /opt/nvim-linux-x86_64
-## tar -C /opt -xzf nvim-linux-x86_64.tar.gz
-## ln -sf /opt/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
-
-echo " --- complete ---"
-echo "apt update, core app installation"
-echo "Next, clone the dotfiles and run install.sh"
-echo "Don't forget to grant chmod 755."
-
+echo "   ---------------------------------"
+echo "       Core packages installed"
+echo "   --------------------------------"
+echo "Next:"
+echo "  git clone git@github.com:PowerShellHERO/dotfiles.git"
+echo "  chmod 755 ~/dotfiles/install.sh"
+echo "  ~/dotfiles/install.sh"
 
