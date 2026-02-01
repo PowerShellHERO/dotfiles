@@ -12,7 +12,7 @@ if [ "$EUID" -ne 0 ]; then
   exit 1
 fi
 
-if [ ! -d ~/dotfiles]; then
+if [ ! -d ~/dotfiles ]; then
    git clone https://github.com/PowerShellHERO/dotfiles.git
    echo "Downlaod dotfiles"
 fi
