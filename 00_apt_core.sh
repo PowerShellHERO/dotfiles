@@ -2,7 +2,7 @@
 #
 # for ubuntu
 # 
-# curl -fsSL hhttps://raw.githubusercontent.com/PowerShellHERO/dotfiles/refs/heads/main/00_apt_core.sh | sudo bash
+# curl -fsSL https://raw.githubusercontent.com/PowerShellHERO/dotfiles/refs/heads/main/00_apt_core.sh | sudo bash
 #
 
 set -e
@@ -13,7 +13,7 @@ if [ "$EUID" -ne 0 ]; then
     echo "警告: /opt への展開には管理者権限が必要。"
     echo "sudo をつけて再実行してください。"
     echo "Usage:"
-    echo "curl -fsSL hhttps://raw.githubusercontent.com/PowerShellHERO/dotfiles/refs/heads/main/00_apt_core.sh | sudo bash"
+    echo "curl -fsSL https://raw.githubusercontent.com/PowerShellHERO/dotfiles/refs/heads/main/00_apt_core.sh | sudo bash"
     exit 1
 fi
 
