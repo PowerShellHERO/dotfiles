@@ -2,7 +2,7 @@
 
 set -e
 
-# REPOSITORY = https://github.com/PowerShellHERO/dotfiles.git
+# REPOSITORY = git@github.com:PowerShellHERO/dotfiles.git
 
 # 管理者権限が必要な作業
 ## スクリプトが sudo で実行されているかチェック
@@ -13,7 +13,7 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 if [ ! -d ~/dotfiles ]; then
-   git clone https://github.com/PowerShellHERO/dotfiles.git
+   git clone git@github.com:PowerShellHERO/dotfiles.git
    echo "Downlaod dotfiles"
 fi
 
