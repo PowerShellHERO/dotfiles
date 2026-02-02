@@ -17,9 +17,17 @@ if [ "$EUID" -ne 0 ]; then
     exit 1
 fi
 
+
 export DEBIAN_FRONTEND=noninteractive
 apt update
 apt upgrade -y
+
+# locales 
+apt install -y locales
+locale-gen en_US.UTF-8
+update-locale LANG=en_US.UTF-8
+
+# core
 apt install -y git python3 zsh
   
 mkdir -p ~/download && cd ~/download
