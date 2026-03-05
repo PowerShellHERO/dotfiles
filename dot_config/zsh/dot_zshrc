@@ -47,7 +47,7 @@ function dotpush() {
 	# コミットして戻る (chezmoi cd からでは cd - 出来ない)
 	chezmoi add $fn
 	cd $HOME/.local/share/chezmoi
-	chezmoi cd && git add -A && git commit
+	git add -A && git commit
 	cd -
 }
 
