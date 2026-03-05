@@ -28,4 +28,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 -- }}}
 
+-- abbreviations
+vim.cmd([[
+" iabbr nvim Neovim
+" cabbr add !chezmoi add %
+]])
 
