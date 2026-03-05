@@ -1,0 +1,170 @@
+
+# ~/.zshenv
+# $XDG_CONFIG_HOME/tmux/tmux.conf
+
+# for tmux
+typeset -U path PATH
+export TERM=xterm-256color
+
+# 現在は設計中のため一緒にリロード。削除予定
+source ~/.zshenv
+
+setopt no_beep
+setopt IGNORE_EOF
+
+## util
+function green() {
+  print "\033[1;32m$*\033[0m"
+}
+
+function yellow() {
+  print "\033[1;33m$*\033[0m"
+}
+
+function copy-line() {
+  echo -n $BUFFER | clip.exe
+}
+zle -N copy-line
+
+function co() { # edit zshrc
+    nvim $ZDOTDIR/.zshrc
+
+    # arge -eq 'tmux'
+    # nvim $XDG_CONFIG_HOME/tmux/tmux.conf
+}
+function so() { # reload zshrc
+	source $ZDOTDIR/.zshrc
+	green "reload .zshrc"
+}
+
+
+# 現在時刻と天気
+function sora() {
+	echo ''
+	python3 ~/sora.py
+}
+
+## keybind
+# Ctrl = "^" or "\C-"
+# Alt  = "^[" or "\e"
+
+bindkey "^u" beginning-of-line      # HOME
+bindkey "^d" backward-delete-char   # BS
+bindkey "^k" up-line-or-history     # 上
+# bindkey "^N" down-line-or-history # 下
+bindkey "^h" backward-char          # 左
+bindkey "^l" forward-char           # 右
+bindkey "^z" undo                   # Undo
+bindkey '^a' copy-line # cmd に入力中の文字列をコピー
+
+bindkey "^b" backward-word
+bindkey "^f" forward-word
+
+## alias
+alias ls=ls\ --color=auto
+alias vi=nvim
+### nvim を less 代わりに使う
+alias vl=nvim\ -R
+## やりすぎ？
+## export PAGER=nvim\ -R
+
+alias gl="git log --name-status --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(cyan)%cd %Cgreen[%cr]  %s'"
+
+
+## man で引数を撮って 'nvim -R' に渡す。さらに filetype=man を追加。
+## function man() { man $1 | nvim -R ... } みたいな。
+
+## compgen -c | fzf | xarges man
+
+## export
+
+export LESS='-R -X -i -P ?f%f:(stdin).  ?lb%lb?L/%L..  [?eEOF:?pb%pb\%..]'
+
+## 補完 -Completion-
+
+# ignore-case 
+# zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
+
+# case prior
+zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' '+m:{[:upper:]}={[:lower:]}'
+
+## zsh-autosuggestions
+
+if [[ -a $ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
+    source $ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh
+else
+	yellow "    PLUGIN NOT FOUND: zsh-autosuggestions"
+	echo   "    follow this command:"
+	echo   "git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_PLUGINS/zsh-autosuggestions"
+	echo   ""
+fi
+
+
+## history
+## ref: https://github.com/yammerjp/dotfiles/blob/main/.config/zsh/history.zsh
+
+HISTSIZE=50000 # メモリに保存するコマンド数
+SAVEHIST=100000 # ヒストリファイルに保存するコマンド数
+setopt extended_history # historyファイルに時刻情報を記録
+
+# 重複するコマンド行は古い方を削除
+setopt hist_ignore_all_dups
+# 直前と同じコマンドラインはヒストリに追加しない
+setopt hist_ignore_dups
+# コマンド履歴ファイルを共有する
+setopt share_history
+# 履歴を追加 (毎回 .zsh_history を作るのではなく)
+setopt append_history
+# 履歴をインクリメンタルに追加
+setopt inc_append_history
+# ヒストリを呼び出してから実行する間に一旦編集可能
+setopt hist_verify
+# 余分な空白は詰めて記録
+setopt hist_reduce_blanks
+# historyコマンドは履歴に登録しない
+setopt hist_no_store
+# 空白で始まるコマンドは履歴に登録しない
+setopt hist_ignore_space
+
+## [TODO]
+## # shellのhistory一覧
+## function select-history() {
+##   BUFFER=$(history -n -r 1 | fzf --no-sort +m --height 50% --query "$LBUFFER" --prompt="History > ")
+##   CURSOR=$#BUFFER
+## }
+## zle -N select-history
+## bindkey '^t' select-history
+## 
+## # shellのhistory一覧
+## function select-history-perfect-matching() {
+##   BUFFER=$(history -n -r 1 | fzf -e --no-sort +m --height 50% --query "$LBUFFER" --prompt="History > ")
+##   CURSOR=$#BUFFER
+## }
+## zle -N select-history-perfect-matching
+## bindkey '^r' select-history-perfect-matching#
+
+
+
+## zsh-syntax-highlighting
+
+if [[ -a $ZSH_PLUGINS/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+    source $ZSH_PLUGINS/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+else
+	yellow "   PLUGIN NOT FOUND: zsh-syntax-highlighting"
+	echo   "   follow this command:"
+	echo   "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_PLUGINS/plugins/zsh-syntax-highlighting/"
+	echo   ""
+fi
+
+## starship
+
+if [[ -a /usr/local/bin/starship ]]; then
+	eval "$(starship init zsh)"
+else
+	yellow "   PLUGIN NOT FOUND: Starship"
+	echo   "   follow this command (maybe):"
+	echo   "curl -sS https://starship.rs/install.sh | sh"
+	echo   ""
+fi
+
+
