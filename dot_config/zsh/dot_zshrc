@@ -1,10 +1,10 @@
-
 # ~/.zshenv
 # $XDG_CONFIG_HOME/tmux/tmux.conf
 
 # for tmux
 typeset -U path PATH
 export TERM=xterm-256color
+setopt interactive_comments
 
 # 現在は設計中のため一緒にリロード。削除予定
 source ~/.zshenv
@@ -35,6 +35,20 @@ function co() { # edit zshrc
 function so() { # reload zshrc
 	source $ZDOTDIR/.zshrc
 	green "reload .zshrc"
+}
+
+# chezmoi add
+function dotpush() {
+	# 更新されたファイルを 1つ取得
+	chezmoi status | head -n 1 | sed 's/.../~\//' | read fn
+	echo $fn
+	chezmoi diff $fn --reverse  | tail -n +6 | batcat -l diff
+	read
+	# コミットして戻る (chezmoi cd からでは cd - 出来ない)
+	chezmoi add $fn
+	cd $HOME/.local/share/chezmoi
+	chezmoi cd && git add -A && git commit
+	cd -
 }
 
 
@@ -68,7 +82,7 @@ alias vl=nvim\ -R
 ## やりすぎ？
 ## export PAGER=nvim\ -R
 
-alias gl="git log --name-status --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(cyan)%cd %Cgreen[%cr]  %s'"
+alias gl="git log --name-status --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(cyan)%cd %Cgreen[%cr]%n%s%n'"
 
 
 ## man で引数を撮って 'nvim -R' に渡す。さらに filetype=man を追加。
