@@ -88,15 +88,17 @@ bindkey '^a' copy-line # cmd に入力中の文字列をコピー
 bindkey "^b" backward-word
 bindkey "^f" forward-word
 
-# セミコロン <=> コロン {{{
-#
-function insert-colon() { LBUFFER+=":" }
-zle -N insert-colon
-bindkey ";" insert-colon
+# バッファがない時のセミコロン => コロン {{{
 
-function insert-semicolon() { LBUFFER+=';' }
+function insert-semicolon() {
+  if [[ -z "$LBUFFER" ]]; then
+    LBUFFER+=":"
+  else
+    LBUFFER+=";"
+  fi
+}
 zle -N insert-semicolon
-bindkey ":" insert-semicolon
+bindkey ";" insert-semicolon
 
 # }}}
 
