@@ -51,6 +51,12 @@ function dotpush() {
 	cd -
 }
 
+# cd $dotfiles
+function dot() {
+    tmux display-popup "cd ~/.local/share/chezmoi && $SHELL"
+}
+
+
 
 # 現在時刻と天気
 function sora() {
