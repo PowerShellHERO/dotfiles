@@ -57,12 +57,22 @@ function dotpush() {
 	cd -
 }
 
-# cd $dotfiles
+# cd $dotfiles with popup window
+
 function dot() {
-    tmux display-popup \
-        -w 80% \
-        -h 80% \
-        -E "cd ~/.local/share/chezmoi/ && $SHELL"
+    # 関数化は出来ない（？）
+    if [[ -z "$TMUX" ]]; then
+        tmux new-session -A -s main \; \
+            display-popup \
+                -w 80% \
+                -h 80% \
+                -E "cd ~/.local/share/chezmoi/ && $SHELL"
+    else
+        tmux display-popup \
+            -w 80% \
+            -h 80% \
+            -E "cd ~/.local/share/chezmoi/ && $SHELL"
+    fi
 }
 
 
