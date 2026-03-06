@@ -31,6 +31,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- abbreviations
 vim.cmd([[
 " iabbr nvim Neovim
-" cabbr add !chezmoi add %
+cabbr add !chezmoi add %
 ]])
+
+-- Untill Lazy Install
+vim.cmd.colorscheme("unokai")
 
