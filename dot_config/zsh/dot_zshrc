@@ -7,10 +7,16 @@ export TERM=xterm-256color
 setopt interactive_comments
 
 # 現在は設計中のため一緒にリロード。削除予定
+# tmux に必要かも
 source ~/.zshenv
 
 setopt no_beep
 setopt IGNORE_EOF
+
+# active compgen
+autoload -Uz bashcompinit
+bashcompinit
+
 
 ## util
 function green() {
