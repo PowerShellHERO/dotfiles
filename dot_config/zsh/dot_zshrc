@@ -7,7 +7,7 @@ export TERM=xterm-256color
 setopt interactive_comments
 
 # 現在は設計中のため一緒にリロード。削除予定
-source ~/.zshenv
+# source ~/.zshenv
 
 setopt no_beep
 setopt IGNORE_EOF
@@ -57,14 +57,13 @@ function dot() {
 }
 
 
-
 # 現在時刻と天気
 function sora() {
 	echo ''
 	python3 ~/sora.py
 }
 
-## keybind
+## keybind {{{
 # Ctrl = "^" or "\C-"
 # Alt  = "^[" or "\e"
 
@@ -80,6 +79,20 @@ bindkey '^a' copy-line # cmd に入力中の文字列をコピー
 bindkey "^b" backward-word
 bindkey "^f" forward-word
 
+# セミコロン <=> コロン {{{
+#
+function insert-colon() { LBUFFER+=":" }
+zle -N insert-colon
+bindkey ";" insert-colon
+
+function insert-semicolon() { LBUFFER+=';' }
+zle -N insert-semicolon
+bindkey ":" insert-semicolon
+
+# }}}
+
+### }}}
+
 ## alias
 alias ls=ls\ --color=auto
 alias vi=nvim
@@ -90,6 +103,7 @@ alias vl=nvim\ -R
 
 alias gl="git log --name-status --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(cyan)%cd %Cgreen[%cr]%n%s%n'"
 
+alias :q=exit\ 0
 
 ## man で引数を撮って 'nvim -R' に渡す。さらに filetype=man を追加。
 ## function man() { man $1 | nvim -R ... } みたいな。
