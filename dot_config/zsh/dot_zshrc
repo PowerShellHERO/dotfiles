@@ -13,10 +13,19 @@ source ~/.zshenv
 setopt no_beep
 setopt IGNORE_EOF
 
-# active compgen
+# Bash Renaissance {{{
+
+## active compgen
 autoload -Uz bashcompinit
 bashcompinit
 
+# help command
+function h() {
+    # bash -c "help '$1'" だと h '((' などが展開されないため
+    bash -c 'help -- "$@"' -- "$@"
+}
+
+# }}}
 
 ## util
 function green() {
