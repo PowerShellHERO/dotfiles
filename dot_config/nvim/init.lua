@@ -17,13 +17,16 @@ require('config.keymaps')
 require("user.ime2").setup()
 
 -- YANK {{{
+local binpath = '~/bin/'
+local clippath = binpath .. 'clip.exe'
+local copycmd = "iconv -f utf-8 -t utf-16le | sed '1s/^\xFF\xFE//' | " .. clippath
 local group = vim.api.nvim_create_augroup("Yank", { clear = true })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = group,
   callback = function()
     local yanked = vim.fn.getreg('"')
-    vim.fn.system("~/bin/clip.exe", yanked)
+    vim.fn.system(copycmd, yanked)
   end,
 })
 -- }}}
