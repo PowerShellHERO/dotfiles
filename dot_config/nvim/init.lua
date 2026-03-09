@@ -29,6 +29,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.fn.system(copycmd, yanked)
   end,
 })
+-- x 連打で，autocmd も連打されるのを回避。
+-- x を null register に捨てる。yank しない。
+-- ただし xp (1文字送り，割と使う) は使えなくなる。
+vim.keymap.set({ 'n', 'x' }, 'x', '"_x', { desc = 'Delete using blackhole register' })
+
 -- }}}
 
 -- abbreviations
@@ -39,4 +44,6 @@ cabbr add !chezmoi add %
 
 -- Untill Lazy Install
 vim.cmd.colorscheme("unokai")
+
+
 
