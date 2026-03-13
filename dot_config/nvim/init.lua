@@ -14,7 +14,7 @@ function pp(v) print(vim.inspect(v)) end -- pretty print table
 require('config.options')
 require('config.keymaps')
 -- require("user.ime").setup()
-require("user.ime2").setup()
+require('user.ime2')
 
 -- YANK {{{
 local binpath = '~/bin/'

@@ -15,6 +15,10 @@ os.execute() だと表示変になる。vim.fn.system() を使う。
 
 local spzenhan_path = "~/bin/spzenhan.exe"
 
+if not vim.uv.fs_stat(vim.fn.expand(spzenhan_path)) then
+  return {}
+end
+
 local M = {}
 
 -- insert mode: true なら InsertMode に入るとき，前回の状態を復元する
@@ -101,7 +105,7 @@ M.setup = function()
   -- print("IME Control plugin loaded!")
 end
 
--- M.setup()
+M.setup()
 
 -- M.ime_on()
 -- print(M.previous_ime_state)
@@ -112,5 +116,5 @@ end
 --
 -- Shoul be: 0, 1, 1
 
-return M
+return {}
 
