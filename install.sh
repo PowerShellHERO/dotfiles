@@ -9,8 +9,7 @@ sudo -v
 ## -   この下を逐次実行
 
 sudo apt update
-sudo apt install -y git curl
-
+sudo apt install -y sudo git curl
 
 sh -c "$(curl -fsLS get.chezmoi.io)"
 
