@@ -11,7 +11,13 @@ sudo -v
 sudo apt update
 sudo apt install -y sudo git curl
 
-sh -c "$(curl -fsLS get.chezmoi.io)"
+PATH="$HOME/bin:$PATH"
+PATH="$HOME/.local/bin:$PATH"
+
+# chezmoi
+if ! command -v chezmoi &>/dev/null; then
+  sh -c "$(curl -fsLS get.chezmoi.io)" -- -b ~/.local/bin
+fi
 
 chezmoi init https://github.com/PowerShellHERO/dotfiles.git
 chezmoi apply
