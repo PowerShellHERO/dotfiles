@@ -2,6 +2,7 @@
 
 set -euo pipefail
 sudo -v
+cd ~
 
 ## Install 方法:
 ## -   このアドレスを `curl | bash`
