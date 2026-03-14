@@ -5,7 +5,8 @@ sudo -v
 sudo apt install -y \
     locales \
     python3 \
-    tmux
+    tmux \
+    fonts-cascadia-code
 
 
 # locales
