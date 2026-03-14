@@ -3,7 +3,7 @@
 
   Linux Ubuntu
 
-require("user.ime2").setup()
+require('user.ime2')
 
 :ime<Tab>
 :ImeToggleIminsert で 日本語/英語モードを toggle
