@@ -29,7 +29,3 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ~/.config/zsh/plugins
 ## Starship
 curl -sS https://starship.rs/install.sh | sh
 
-source ~/.zshenv
-source ~/.config/zsh/.zshrc
-
-
