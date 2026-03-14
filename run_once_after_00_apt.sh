@@ -23,13 +23,13 @@ cd
 # }}}
 
 # zsh plugin
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_PLUGINS/plugins/zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_PLUGINS/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.config/zsh/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.config/zsh/plugins/zsh-autosuggestions
 
 ## Starship
 curl -sS https://starship.rs/install.sh | sh
 
-source "$HOME"/.zshenv
-source "$ZDOTDIR"/.zshrc
+source ~/.zshenv
+source ~/.config/zsh/.zshrc
 
 
