@@ -16,9 +16,9 @@ update-locale LANG=en_US.UTF-8
 mkdir -p ~/download && cd ~/download
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
 
-rm -rf /opt/nvim-linux-x86_64
-tar -C /opt -xzf nvim-linux-x86_64.tar.gz
-ln -sf /opt/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
+sudo rm -rf /opt/nvim-linux-x86_64
+sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
+sudo ln -sf /opt/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
 cd
 # }}}
 
