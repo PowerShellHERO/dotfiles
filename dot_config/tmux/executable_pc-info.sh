@@ -1,7 +1,5 @@
 #!/bin/bash
 
-cpu=$(grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {printf "%.1f", usage}')
-
 # --- CPU（前回スナップショットとの差分）---
 CACHE=~/.cache/_pc-info
 
@@ -34,8 +32,20 @@ fi
 echo "$total_now $busy_now" > "$CACHE"
 ## }}}
 
-# メモリ使用率
-mem=$(free | awk '/Mem:/ {printf "%.1f", $3/$2 * 100.0}')
+# メモリ使用率 {{{
+# (used - buf/cache)/total * 100.0
+# used        $3 
+# buff/cache  $6
+# total       $2
+# used はすでに buff/cache が引かれた値？ ($3 - $6) / $ だと過小評価？
+
+mem=$(free | awk '/Mem:/ {printf "%.1f", $3 / $2 * 100.0}')
+
+# ずっと 2.4% で推移するけど。 stress をかけるとちゃんと増える。
+# sudo apt install stress
+# stress --vm 1 --vm-bytes 4G --timeout 10s
+
+# }}}
 
 # GPU使用率 (NVIDIA用)
 gpu=$(nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits 2>/dev/null || echo "0")
