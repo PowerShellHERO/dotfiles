@@ -1,5 +1,5 @@
 
-FROM ubuntu:24.04
+FROM ubuntu
 
 RUN apt update && apt install -y sudo git curl zsh
 
