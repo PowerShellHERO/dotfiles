@@ -1,0 +1,31 @@
+
+echo "  __reload zshenv__"
+
+# PATH {{{
+# ~/bin/, ~/.config/bin/
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+### }}}
+
+# ~/.zshenv
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_STATE_HOME="$HOME/.local/state"
+
+compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
+
+export HISTFILE="$XDG_STATE_HOME"/zsh/history
+
+export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
+export ZSH_PLUGINS="$ZDOTDIR"/plugins
+
+# python3.13 or later
+# export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc
+export INPUTRC="$XDG_CONFIG_HOME"/readline/inputrc
+
