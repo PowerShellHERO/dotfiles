@@ -27,9 +27,12 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.config/zsh
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.config/zsh/plugins/zsh-autosuggestions
 
 ## Starship
-curl -sS https://starship.rs/install.sh | sh
+curl -sS https://starship.rs/install.sh | sh -s -- -y
 
 echo ""
 echo "--- run_once: apt install DONE ---"
 echo ""
+
+## 'source zshrc' は手動でするしかないかも？
+## zsh 用の script に分けてもダメだった。
 
