@@ -12,13 +12,13 @@ export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
 export ZSH_PLUGINS="$ZDOTDIR"/plugins
 
 # mkdir
-mkdir "$XDG_CONFIG_HOME/zsh"
-mkdir "$XDG_CONFIG_HOME/git"
-mkdir "$XDG_DATA_HOME/fonts"
-mkdir "$XDG_STATE_HOME/zsh"
-mkdir "$XDG_CACHE_HOME/zsh"
-mkdir "$HOME/.local/bin"
-mkdir $ZSH_PLUGINS
+mkdir -p "$XDG_CONFIG_HOME/zsh"
+mkdir -p "$XDG_CONFIG_HOME/git"
+mkdir -p "$XDG_DATA_HOME/fonts"
+mkdir -p "$XDG_STATE_HOME/zsh"
+mkdir -p "$XDG_CACHE_HOME/zsh"
+mkdir -p "$HOME/.local/bin"
+mkdir -p $ZSH_PLUGINS
 
 echo "--- run_once_mkdir DONE ---"
 
