@@ -20,5 +20,7 @@ mkdir -p "$XDG_CACHE_HOME/zsh"
 mkdir -p "$HOME/.local/bin"
 mkdir -p $ZSH_PLUGINS
 
-echo "--- run_once_mkdir DONE ---"
+echo ""
+echo "--- run_once: mkdir DONE ---"
+echo ""
 
