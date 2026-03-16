@@ -55,23 +55,28 @@ function so() { # reload zshrc
 	green "reload .zshrc"
 }
 
-# chezmoi add
-function dotpush() {
+dotstatus() {
     # get one modified file, except 'run_script.sh'
     # exclude run_script (grep -v '^ R')
     local fn
-	chezmoi status | grep -v '^ R' | head -n 1 | sed 's/.../~\//' | read fn
-	echo $fn
-	chezmoi diff $fn --reverse  | tail -n +6 | batcat -l diff
+    chezmoi status | grep -v '^ R' | head -n 1 | sed 's/.../~\//' | read fn
+    echo $fn
+}
 
+# chezmoi add -> git add -> git commit
+function dotpush() {
+    local fn=$(dotstatus)
+    [[ "$fn" == "" ]] && green "not modified" && return 0
+
+    chezmoi diff $fn --reverse  | tail -n +6 | batcat -l diff
     echo "Add and commit? [Enter to continue / q to quit]: "
     read -k ans # -k: read first char
     [[ "$ans" == "q" ]] && echo 'uit!' && return 0
 
-	chezmoi add $fn
+    chezmoi add $fn
     cd $(chezmoi source-path)
-	git add -A && git commit
-	cd -
+    git add -A && git commit
+    cd -
 }
 
 # cd $dotfiles with popup window
