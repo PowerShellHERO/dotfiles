@@ -37,7 +37,9 @@ function yellow() {
 }
 
 function copy-line() {
-  echo -n $BUFFER | iconv -f utf-8 -t utf-16le | sed '1s/^\xFF\xFE//' | ~/bin/clip.exe
+    echo -n $BUFFER | iconv -f utf-8 -t utf-16le | sed '1s/^\xFF\xFE//' | ~/bin/clip.exe
+    BUFFER=''
+    zle reset-prompt
 }
 
 zle -N copy-line
