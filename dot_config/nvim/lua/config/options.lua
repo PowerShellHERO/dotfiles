@@ -90,7 +90,7 @@ vim.o.breakindent = true
 
 -- Keep signcolumn on by default
 -- 左端に，modified mark などを表示するためのスペースを常時表示する
-vim.o.signcolumn = 'yes'
+vim.o.signcolumn = 'no'
 
 -- Decrease mapped sequence wait time
 vim.o.timeoutlen = 300
