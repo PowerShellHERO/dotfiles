@@ -17,7 +17,6 @@ require('config.lazy')
 
 require('user.ime2')
 
-
 -- YANK {{{
 local binpath = '~/bin/'
 local clippath = binpath .. 'clip.exe'
@@ -49,5 +48,10 @@ cabbr ya %y
 -- }}}
 
 -- Untill Lazy Install
-vim.cmd.colorscheme("unokai")
+-- vim.cmd.colorscheme("unokai")
+
+-- JAPANESE WRITING (vip gq)
+vim.opt.textwidth  = 76
+vim.opt.formatexpr = "autofmt#japanese#formatexpr()"
+-- vim.opt.wrap = true
 
