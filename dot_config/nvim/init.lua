@@ -13,8 +13,10 @@ function pp(v) print(vim.inspect(v)) end -- pretty print table
 
 require('config.options')
 require('config.keymaps')
--- require("user.ime").setup()
+require('config.lazy')
+
 require('user.ime2')
+
 
 -- YANK {{{
 local binpath = '~/bin/'
@@ -48,6 +50,4 @@ cabbr ya %y
 
 -- Untill Lazy Install
 vim.cmd.colorscheme("unokai")
-
-
 
