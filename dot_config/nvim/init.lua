@@ -36,11 +36,15 @@ vim.keymap.set({ 'n', 'x' }, 'x', '"_x', { desc = 'Delete using blackhole regist
 
 -- }}}
 
--- abbreviations
+-- abbreviations {{{
+
 vim.cmd([[
 " iabbr nvim Neovim
 cabbr add !chezmoi add %
+cabbr ya %y
 ]])
+
+-- }}}
 
 -- Untill Lazy Install
 vim.cmd.colorscheme("unokai")
