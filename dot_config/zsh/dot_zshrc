@@ -3,7 +3,7 @@
 
 # for tmux
 typeset -U path PATH
-export TERM=xterm-256color
+export TERM=screen-256color
 setopt interactive_comments
 
 # 現在は設計中のため一緒にリロード。削除予定
