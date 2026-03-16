@@ -73,20 +73,18 @@ function dotpush() {
 }
 
 # cd $dotfiles with popup window
+function _popup_dotfilesdir() {
+    tmux display-popup \
+        -w 80% \
+        -h 80% \
+        -E "cd "$(chezmoi source-path)" && $SHELL"
+}
 
 function dot() {
-    # 関数化は出来ない（？）
-    if [[ -z "$TMUX" ]]; then
-        tmux new-session -A -s main \; \
-            display-popup \
-                -w 80% \
-                -h 80% \
-                -E "cd ~/.local/share/chezmoi/ && $SHELL"
+    if tmux has; then
+        _popup_dotfilesdir
     else
-        tmux display-popup \
-            -w 80% \
-            -h 80% \
-            -E "cd ~/.local/share/chezmoi/ && $SHELL"
+        tmux new-session -A -s main -c "$(chezmoi source-path)"
     fi
 }
 
