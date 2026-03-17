@@ -8,11 +8,19 @@ local opts = { noremap = true, silent = true }
 vim.g.mapleader = ' '
 
 vim.keymap.set("n", "<Leader>cd", function()
-  local current_file = vim.fn.expand('%:t')
-  local search_current_file = (current_file == "") and "" or  ('/' .. current_file)
-  vim.cmd.Ex()
-  vim.cmd(search_current_file)
-end ,{ desc="Netrw with Temporary Buffer" })
+    local current_file = vim.fn.expand('%:t')
+    local search_current_file = (current_file == "") and "" or  current_file
+
+    vim.cmd([[
+    :Oil
+    set hlsearch
+    ]])
+    vim.fn.setreg("/", current_file)
+
+end ,{ desc="Oil" })
+    -- vim.cmd.Ex()
+    --vim.cmd(search_current_file)
+-- end ,{ desc="Netrw with Temporary Buffer" })
 
 -- EDIT VIMRC
 keymap('n', '<Space>o', '<cmd>edit $MYVIMRC<CR>', opts)
