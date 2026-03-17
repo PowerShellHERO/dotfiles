@@ -29,11 +29,11 @@ function h() {
 
 ## util
 function green() {
-  print "\033[1;32m$*\033[0m"
+    print "\033[1;32m$*\033[0m"
 }
 
 function yellow() {
-  print "\033[1;33m$*\033[0m"
+    print "\033[1;33m$*\033[0m"
 }
 
 function copy-line() {
@@ -51,8 +51,8 @@ function co() { # edit zshrc
     # nvim $XDG_CONFIG_HOME/tmux/tmux.conf
 }
 function so() { # reload zshrc
-	source $ZDOTDIR/.zshrc
-	green "reload .zshrc"
+    source $ZDOTDIR/.zshrc
+    green "reload .zshrc"
 }
 
 dotstatus() {
@@ -85,7 +85,7 @@ function _popup_dotfilesdir() {
         -w 80% \
         -h 80% \
         -E "cd "$(chezmoi source-path)" && $SHELL"
-}
+    }
 
 function dot() {
     if tmux has; then
@@ -95,11 +95,10 @@ function dot() {
     fi
 }
 
-
 # 現在時刻と天気
 function sora() {
-	echo ''
-	python3 ~/sora.py
+    echo ''
+    python3 ~/sora.py
 }
 
 ## keybind {{{
@@ -121,11 +120,11 @@ bindkey "^f" forward-word
 # バッファがない時のセミコロン => コロン {{{
 
 function insert-semicolon() {
-  if [[ -z "$LBUFFER" ]]; then
-    LBUFFER+=":"
-  else
-    LBUFFER+=";"
-  fi
+    if [[ -z "$LBUFFER" ]]; then
+        LBUFFER+=":"
+    else
+        LBUFFER+=";"
+    fi
 }
 zle -N insert-semicolon
 bindkey ";" insert-semicolon
@@ -141,8 +140,6 @@ alias vi=nvim
 alias vl=nvim\ -R
 ## やりすぎ？
 ## export PAGER=nvim\ -R
-
-alias gl="git log --name-status --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(cyan)%cd %Cgreen[%cr]%n%s%n'"
 
 alias :q=exit\ 0
 
@@ -168,10 +165,10 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' '+m:{[:upper:]}=
 if [[ -a $ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
     source $ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh
 else
-	yellow "    PLUGIN NOT FOUND: zsh-autosuggestions"
-	echo   "    follow this command:"
-	echo   "git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_PLUGINS/zsh-autosuggestions"
-	echo   ""
+    yellow "    PLUGIN NOT FOUND: zsh-autosuggestions"
+    echo   "    follow this command:"
+    echo   "git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_PLUGINS/zsh-autosuggestions"
+    echo   ""
 fi
 
 
@@ -225,21 +222,32 @@ setopt hist_ignore_space
 if [[ -a $ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
     source $ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 else
-	yellow "   PLUGIN NOT FOUND: zsh-syntax-highlighting"
-	echo   "   follow this command:"
-	echo   "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_PLUGINS/plugins/zsh-syntax-highlighting/"
-	echo   ""
+    yellow "   PLUGIN NOT FOUND: zsh-syntax-highlighting"
+    echo   "   follow this command:"
+    echo   "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_PLUGINS/plugins/zsh-syntax-highlighting/"
+    echo   ""
 fi
 
 ## starship
 
 if [[ -a /usr/local/bin/starship ]]; then
-	eval "$(starship init zsh)"
+    eval "$(starship init zsh)"
 else
-	yellow "   PLUGIN NOT FOUND: Starship"
-	echo   "   follow this command (maybe):"
-	echo   "curl -sS https://starship.rs/install.sh | sh"
-	echo   ""
+    yellow "   PLUGIN NOT FOUND: Starship"
+    echo   "   follow this command (maybe):"
+    echo   "curl -sS https://starship.rs/install.sh | sh"
+    echo   ""
 fi
 
+
+## git
+
+gitautoadd() {
+    local fn
+    igt status --short | head -n 1 | sed 's/.../~\//' | read fn
+    [[ "$fn" == "" ]] && green "not modified" && return 0
+
+    git add fn
+    git commit
+}
 
