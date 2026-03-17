@@ -10,7 +10,7 @@ cd ~
 ## -   この下を逐次実行
 
 sudo apt update
-sudo apt install -y sudo git curl
+sudo apt install -y sudo git curl cc
 
 PATH="$HOME/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
