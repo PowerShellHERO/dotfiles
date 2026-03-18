@@ -3,8 +3,11 @@
 
 # for tmux
 typeset -U path PATH
+
+# global
 export TERM=screen-256color
 setopt interactive_comments
+WORDCHARS='*?_.[]~=&;!#$%^(){}<>'
 
 # 現在は設計中のため一緒にリロード。削除予定
 # tmux に必要かも
