@@ -59,8 +59,10 @@ dotstatus() {
     echo $fn
 }
 
+## chezmoi {{{
+
 # chezmoi add -> git add -> git commit
-function dotpush() {
+dotpush() {
     local fn=$(dotstatus)
     [[ "$fn" == "" ]] && green "not modified" && return 0
 
@@ -76,20 +78,22 @@ function dotpush() {
 }
 
 # cd $dotfiles with popup window
-function _popup_dotfilesdir() {
+_popup_dotfilesdir() {
     tmux display-popup \
         -w 80% \
         -h 80% \
         -E "cd "$(chezmoi source-path)" && $SHELL"
     }
 
-function dot() {
+dot() {
     if tmux has; then
         _popup_dotfilesdir
     else
         tmux new-session -A -s main -c "$(chezmoi source-path)"
     fi
 }
+
+### }}}
 
 ## keybind {{{
 
