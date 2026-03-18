@@ -251,3 +251,9 @@ gitautoadd() {
     git commit
 }
 
+## git_alias
+
+alias gs=git\ status\ --short
+alias ga=gitautoadd
+alias gl="git log --name-status --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(cyan)%cd %Cgreen[%cr]%n%s%n'"
+
