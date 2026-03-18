@@ -27,7 +27,8 @@ opt.undofile = false
 -- opt.directory = 'c:\\nvimswap'
 opt.history = 1000
 opt.foldmethod = 'marker'
-opt.iskeyword:append({ '-', "'" })
+opt.iskeyword:append({ "'" })
+opt.iskeyword:remove({ "-" })
 opt.helplang = { 'en' }
 opt.suffixesadd:append({ '.txt', '.md' })
 opt.wildmenu = true
