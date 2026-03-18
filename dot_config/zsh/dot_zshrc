@@ -247,7 +247,7 @@ gitautoadd() {
     igt status --short | head -n 1 | sed 's/.../~\//' | read fn
     [[ "$fn" == "" ]] && success "not modified" && return 0
 
-    git add fn
+    git add $fn
     git commit
 }
 
