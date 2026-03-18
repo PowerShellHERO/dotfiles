@@ -34,5 +34,22 @@ return {
             italic = false,
         },
     },
+
+    {
+        "rose-pine/neovim",
+        lazy = true,
+        name = "rose-pine",
+        opts = {
+            variant = "moon",
+            dark_variant = "main",
+
+            styles = {
+                bold = true,
+                italic = false,
+                transparency = false,
+            },
+        }
+    },
 }
+
 
