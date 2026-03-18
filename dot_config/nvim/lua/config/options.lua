@@ -10,6 +10,7 @@ local opt = vim.opt
 opt.encoding = 'utf-8'
 opt.fileencoding = 'utf-8'
 opt.bomb = false
+-- opt.ambiwidth = 'double'
 
 -- CODE STYLE
 opt.expandtab = true

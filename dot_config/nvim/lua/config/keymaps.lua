@@ -114,7 +114,6 @@ keymap('n', '<C-e>', 'xhep', opts)
 
 
 vim.cmd([[
-set ambiwidth=double 
 " KILL {
 
     noremap! <C-d> <C-h>
