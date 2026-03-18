@@ -12,7 +12,6 @@ return {
             "python",
             "lua",
             "bash",
-            "zsh",
             "markdown",
             "markdown_inline",
             "json",
@@ -22,7 +21,6 @@ return {
             "query",
             "vim",
             "vimdoc",
-            "tmux",
         }
 
         for _, parser in ipairs(parsers) do
@@ -44,5 +42,3 @@ return {
         })
     end
 }
-
-
