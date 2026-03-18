@@ -51,14 +51,6 @@ function sora() { # Time and weather
 }
 ### }}}
 
-function copy-line() {
-    echo -n $BUFFER | iconv -f utf-8 -t utf-16le | sed '1s/^\xFF\xFE//' | ~/bin/clip.exe
-    BUFFER=''
-    zle reset-prompt
-}
-
-zle -N copy-line
-
 dotstatus() {
     # get one modified file, except 'run_script.sh'
     # exclude run_script (grep -v '^ R')
@@ -100,6 +92,15 @@ function dot() {
 }
 
 ## keybind {{{
+
+function copy-line() {
+    echo -n $BUFFER | iconv -f utf-8 -t utf-16le | sed '1s/^\xFF\xFE//' | ~/bin/clip.exe
+    BUFFER=''
+    zle reset-prompt
+}
+
+zle -N copy-line
+
 # Ctrl = "^" or "\C-"
 # Alt  = "^[" or "\e"
 
