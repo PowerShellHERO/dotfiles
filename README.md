@@ -17,7 +17,3 @@ curl -fsSL https://raw.githubusercontent.com/PowerShellHERO/dotfiles/refs/heads/
 source ~/.zshenv
 source ~/.config/zsh/.zshrc
 ```
-
-  Install Rust (curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh)
-
-
