@@ -6,7 +6,9 @@ sudo apt install -y \
     locales \
     python3 \
     tmux \
-    fonts-cascadia-code
+    fonts-cascadia-code \
+    build-essential \
+    clang
 
 
 # locales
@@ -21,6 +23,13 @@ sudo rm -rf /opt/nvim-linux-x86_64
 sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
 sudo ln -sf /opt/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
 cd
+# }}}
+# Rust {{{
+
+## req build-essential, clang (for tree-sitter-cli)
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --profile minimal --default-toolchain stable -y
+cargo install --locked tree-sitter-cli
+
 # }}}
 
 # zsh plugin
