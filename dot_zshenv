@@ -29,3 +29,4 @@ export ZSH_PLUGINS="$ZDOTDIR"/plugins
 # export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc
 export INPUTRC="$XDG_CONFIG_HOME"/readline/inputrc
 
+. "$HOME/.cargo/env"
