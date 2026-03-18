@@ -27,14 +27,29 @@ function h() {
 
 # }}}
 
-## util
-function green() {
+## util {{{
+green() {
     print "\033[1;32m$*\033[0m"
 }
 
-function yellow() {
+yellow() {
     print "\033[1;33m$*\033[0m"
 }
+
+co() { # edit zshrc
+    nvim $ZDOTDIR/.zshrc
+}
+
+so() { # reload zshrc
+    source $ZDOTDIR/.zshrc
+    green "reload .zshrc"
+}
+
+function sora() { # Time and weather
+    echo ''
+    python3 ~/sora.py
+}
+### }}}
 
 function copy-line() {
     echo -n $BUFFER | iconv -f utf-8 -t utf-16le | sed '1s/^\xFF\xFE//' | ~/bin/clip.exe
@@ -43,17 +58,6 @@ function copy-line() {
 }
 
 zle -N copy-line
-
-function co() { # edit zshrc
-    nvim $ZDOTDIR/.zshrc
-
-    # arge -eq 'tmux'
-    # nvim $XDG_CONFIG_HOME/tmux/tmux.conf
-}
-function so() { # reload zshrc
-    source $ZDOTDIR/.zshrc
-    green "reload .zshrc"
-}
 
 dotstatus() {
     # get one modified file, except 'run_script.sh'
@@ -93,12 +97,6 @@ function dot() {
     else
         tmux new-session -A -s main -c "$(chezmoi source-path)"
     fi
-}
-
-# 現在時刻と天気
-function sora() {
-    echo ''
-    python3 ~/sora.py
 }
 
 ## keybind {{{
