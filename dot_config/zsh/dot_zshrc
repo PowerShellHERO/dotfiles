@@ -242,9 +242,9 @@ fi
 
 ## git
 
-gitautoadd() {
+gitautocommit() {
     local fn
-    igt status --short | head -n 1 | sed 's/.../~\//' | read fn
+    git status --short | head -n 1 | sed 's/...//' | read fn
     [[ "$fn" == "" ]] && success "not modified" && return 0
 
     git add $fn
@@ -254,6 +254,6 @@ gitautoadd() {
 ## git_alias
 
 alias gs=git\ status\ --short
-alias ga=gitautoadd
+alias ga=gitautocommit
 alias gl="git log --name-status --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(cyan)%cd %Cgreen[%cr]%n%s%n'"
 
