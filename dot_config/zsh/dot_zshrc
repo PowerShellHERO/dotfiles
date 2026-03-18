@@ -47,7 +47,7 @@ so() { # reload zshrc
 
 function sora() { # Time and weather
     echo ''
-    python3 ~/sora.py
+    python3 ~/bin/sora.py
 }
 ### }}}
 
@@ -92,6 +92,8 @@ dot() {
         tmux new-session -A -s main -c "$(chezmoi source-path)"
     fi
 }
+
+alias ds='chezmoi status | grep -v "^ R"'
 
 ### }}}
 
