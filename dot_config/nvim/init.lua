@@ -16,6 +16,7 @@ require('config.keymaps')
 require('config.lazy')
 
 require('user.ime2')
+require('user.file_navigation').setup()
 
 -- YANK {{{
 local binpath = '~/bin/'
