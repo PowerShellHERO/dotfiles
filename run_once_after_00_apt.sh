@@ -8,7 +8,8 @@ sudo apt install -y \
     tmux \
     fonts-cascadia-code \
     build-essential \
-    clang
+    clang \
+    unzip
 
 
 # locales
@@ -30,7 +31,9 @@ cd
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --profile minimal --default-toolchain stable -y
 . "$HOME/.cargo/env"
 cargo install --locked tree-sitter-cli
-
+rustup component add rust-analyzer
+rustup component add clippy  # linter
+rustup component add rustfmt
 # }}}
 
 # zsh plugin
