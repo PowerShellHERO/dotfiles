@@ -119,11 +119,5 @@ vim.o.inccommand = 'split'
 -- -- Minimal number of screen lines to keep above and below the cursor.
 vim.o.scrolloff = 5
 
--- (like `:q`), 確認が必要な buffer に飛んで dialog asking
--- See `:help 'confirm'`
-vim.o.confirm = true
-
-
 -- vim.keymap.set('n', '<leader>dq', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostic [Q]uickfix list' })
-
 
