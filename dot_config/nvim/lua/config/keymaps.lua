@@ -123,8 +123,8 @@ vim.cmd([[
 
 nnoremap k gk
 nnoremap n gj
-vnoremap n j
-vnoremap j n
+" vnoremap n j
+" vnoremap j n
 cnoremap <C-k> <UP>
 cnoremap <C-n> <DOWN>
 inoremap <C-k> <UP>
@@ -167,8 +167,8 @@ nnoremap ; :
 -- -- MOVE: UP, DOWN
 -- keymap('n', 'k', 'gk', opts)
 -- keymap('n', 'n', 'gj', opts)
--- keymap('v', 'n', 'j', opts)
--- keymap('v', 'j', 'n', opts)
+vim.keymap.set("x", "n", "j")
+vim.keymap.set("x", "j", "n")
 -- keymap('c', '<C-k>', '<Up>', opts)
 -- keymap('c', '<C-n>', '<Down>', opts)
 -- keymap('i', '<C-k>', '<C-o>gk', opts)

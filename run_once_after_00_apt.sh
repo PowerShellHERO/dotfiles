@@ -9,7 +9,10 @@ sudo apt install -y \
     fonts-cascadia-code \
     build-essential \
     clang \
-    unzip
+    unzip \
+    cmake \
+    libluajit-5.1-dev
+
 
 
 # locales
