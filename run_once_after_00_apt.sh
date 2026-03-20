@@ -39,6 +39,13 @@ rustup component add rust-analyzer
 rustup component add clippy  # linter
 rustup component add rustfmt
 # }}}
+# python pip --break {{{
+
+## rust の package uv だけは強制的に導入。他は venv から
+pip3 install --break-system-packages uv
+
+# }}}
+
 
 # zsh plugin
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.config/zsh/plugins/zsh-syntax-highlighting
