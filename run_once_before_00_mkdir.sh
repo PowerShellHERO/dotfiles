@@ -20,6 +20,14 @@ mkdir -p "$XDG_CACHE_HOME/zsh"
 mkdir -p "$HOME/.local/bin"
 mkdir -p $ZSH_PLUGINS
 
+# WSL2 なら Windows の Path を引き継がない。（）
+if [ -f /etc/wsl.conf ]; then
+    echo -e "\n[interop]\nappendWindowsPath = false" | sudo tee -a /etc/wsl.conf
+fi
+# 一時的に Windows 側の Path を削除 (あれば)
+export PATH=$(echo $PATH | tr ":" "\n" | grep -v "/mnt/c" | tr "\n" ":" | sed "s/:$//")
+
+
 echo ""
 echo "--- run_once: mkdir DONE ---"
 echo ""
