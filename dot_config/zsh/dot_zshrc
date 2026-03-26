@@ -147,6 +147,8 @@ alias vl=nvim\ -R
 ## export PAGER=nvim\ -R
 
 alias :q=exit\ 0
+alias start=explorer.exe
+
 
 ## man で引数を撮って 'nvim -R' に渡す。さらに filetype=man を追加。
 ## function man() { man $1 | nvim -R ... } みたいな。
@@ -261,4 +263,12 @@ gitautocommit() {
 alias gs=git\ status\ --short
 alias ga=gitautocommit
 alias gl="git log --name-status --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(cyan)%cd %Cgreen[%cr]%n%s%n'"
+
+
+# fnm
+FNM_PATH="/home/quiet/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="$FNM_PATH:$PATH"
+  eval "$(fnm env --shell zsh)"
+fi
 
