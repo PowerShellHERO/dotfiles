@@ -1,6 +1,8 @@
 
 echo "  __reload zshenv__"
 
+export PATH="$PATH:/mnt/c/Windows/"
+
 # PATH {{{
 # ~/bin/, ~/.config/bin/
 if [ -d "$HOME/bin" ] ; then
