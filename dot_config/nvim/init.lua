@@ -16,12 +16,13 @@ function pp(v) print(vim.inspect(v)) end -- pretty print table
 require('config.options')
 require('config.keymaps')
 require('config.scratch')
-require('config.wsl')
-
 require('config.lazy')
 
-require('user.ime2')
+-- users
 require('user.file_navigation').setup()
+-- Comment out if not needed.
+require('config.wsl')
+
 
 -- abbreviations {{{
 
