@@ -28,16 +28,21 @@ opt.undofile = false
 -- opt.directory = 'c:\\nvimswap'
 opt.history = 1000
 opt.foldmethod = 'marker'
-opt.iskeyword:append({ "'" })
 opt.iskeyword:remove({ "-" })
 opt.helplang = { 'en' }
-opt.suffixesadd:append({ '.txt', '.md' })
 opt.wildmenu = true
-opt.wildmode = 'full'
+-- opt.wildmode = 'full'
 opt.display:append('lastline')
+
+-- opt.suffixesadd:append({ '.txt', '.md' })
+opt.path = '.'
+-- opt.path:remove("**")
+
 
 -- FileType
 -- Lua, VimScript
+
+-- ../../after/ftplugin/lua.lua
 vim.api.nvim_create_augroup("LuaSettings", { clear = true })
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -47,18 +52,6 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.number = true
     vim.opt_local.expandtab = true
     vim.o.number = true
-    vim.o.relativenumber = true
-  end,
-})
-
--- Markdown
-vim.api.nvim_create_augroup("MarkdownSettings", { clear = true })
-
-vim.api.nvim_create_autocmd("FileType", {
-  group = "MarkdownSettings",
-  pattern = "markdown",
-  callback = function()
-    vim.opt_local.expandtab = false
   end,
 })
 
@@ -120,4 +113,14 @@ vim.o.inccommand = 'split'
 vim.o.scrolloff = 5
 
 -- vim.keymap.set('n', '<leader>dq', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostic [Q]uickfix list' })
+
+-- fold text
+
+function Myfoldtext()
+    local first_line = vim.fn.getline(vim.v.foldstart)
+    first_line = first_line:gsub('[ ;<>#{}"]*$', '')
+    return first_line .. "               - - -- --- ----- -- ------ -------- ------------ "
+end
+
+vim.opt.foldtext = 'v:lua.Myfoldtext()'
 

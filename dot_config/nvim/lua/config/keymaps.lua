@@ -82,7 +82,10 @@ keymap('n', '-', '<cmd>bnext<CR>', opts)
 keymap('n', '=', '<cmd>bprevious<CR>', opts)
 
 -- EOF
-keymap('n', '<C-o>', "m'G", opts)
+-- -- Set the previous context mark
+-- -- G, zt がいいか zz がいいかは検討中。
+keymap('n', '<C-o>', "m'Gzt", opts)
+
 keymap('n', '<C-c>', '<C-o>', opts)
 
 -- USABILITY (なんか挙動がおかしいので，vim.cmd で設定)
@@ -125,8 +128,9 @@ nnoremap k gk
 nnoremap n gj
 " vnoremap n j
 " vnoremap j n
-cnoremap <C-k> <UP>
-cnoremap <C-n> <DOWN>
+cnoremap <C-k> <C-p>
+cnoremap <C-n> <C-n>
+
 inoremap <C-k> <UP>
 inoremap <C-n> <DOWN>
 " inoremap <C-k> <C-o>gk
@@ -174,7 +178,6 @@ vim.keymap.set("x", "j", "n")
 -- keymap('i', '<C-k>', '<C-o>gk', opts)
 -- keymap('i', '<C-n>', '<C-o>gj', opts)
 -- keymap('i', '<C-j>', '<C-n>', opts)
--- keymap('n', '<C-w>n', '<C-w>j', opts)
 -- keymap('n', 'u', '{zz', opts)
 -- keymap('n', 'e', '}zz', opts)
 -- 
@@ -205,11 +208,9 @@ keymap("n", ">", "V>gv")
 keymap("v", "<", "<gv", { desc = "Indent left and reselect"})
 keymap("v", ">", ">gv", { desc = "Indent right and reselect"})
 
-vim.opt.path:append("**")
-
-
 keymap("n", "<Leader>m", function() print('a') end, { desc = "ii"})
 
-
+-- test
+keymap('v', 'gp', 'gq', opts)
 
 
