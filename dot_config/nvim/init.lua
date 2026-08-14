@@ -30,6 +30,7 @@ vim.cmd([[
 " iabbr nvim Neovim
 cabbr add !chezmoi add %
 cabbr ya %y
+cabbr grep <Cmd>Telescope live_grep<CR>
 ]])
 
 -- }}}
