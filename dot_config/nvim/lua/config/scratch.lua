@@ -50,48 +50,33 @@ end, { desc = "Set search pattern based on filetype" })
 -- smart_gf {{{
 -- テキスト内にファイル名を表現する時，かならず (), ` `, "" で囲む。
 -- `gf` を少し拡張すれば，filejump 可能
---
--- 例えば， `-   sample.txt` みたいな行の先頭では `gf` がファイルを開かない。
 
 local function smart_gf()
     -- まずは通常の gf と同じ判定を試す
-    -- その後 f(, f`, f" をしてから gf判定を試す
-    -- 文字列が取得できたら `gf`
+    -- その後 f(, f`, f" をしてから gf を試す
+    -- バッファが変わってたら終了
 
-    local filename
     local cmd
-    local patterns = {":", "f(", "f`", 'f"', "f " }
+    local move_patterns = {":", "f(", "f`", 'f"', "f " }
 
-    for _, v in ipairs(patterns) do
-        cmd = string.format("normal %s", v)
+    local bufname = vim.api.nvim_buf_get_name(0)
+
+    for _, v in ipairs(move_patterns) do
+        -- 次の記号 (, `, ", \s に移動して gf
+        cmd = string.format("silent! normal! %sgf", v)
         -- print (cmd)
         vim.cmd(cmd)
-        filename = vim.fn.expand("<cfile>")
 
-        -- 見つかったら開く
-        if filename ~= "" then
-            if vim.fn.filereadable(filename) == 1 then
-                vim.cmd.edit(vim.fn.fnameescape(filename))
-                return
-            end
+        -- バッファが変わってたら終了
+        if bufname ~= vim.api.nvim_buf_get_name(0) then
+            return
         end
     end
 
-    -- 通常エラー
-    -- vim.notify("File not found", vim.log.levels.WARN)
-
-    -- このスクリプトでは，
-    -- lua Script の記法など，gf 出来るけど，出来ない判定に
-    -- なる場合がある。最後は，強制的に gf して，見つからな
-    -- ければ gf のエラーを出す
-    vim.cmd("normal! gf")
+    vim.notify("File not found", vim.log.levels.WARN)
 end
 
 vim.keymap.set("n", "gf", smart_gf)
 
--- (TODO.md)
--- ate `TODO.md`
--- ("`TODO.md`")
---    TODO.md
 -- }}}
 
