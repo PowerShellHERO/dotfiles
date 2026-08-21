@@ -5,29 +5,47 @@ sudo -v
 sudo apt install -y \
     locales \
     python3 \
-    tmux \
     fonts-cascadia-code \
     build-essential \
     clang \
     unzip \
     cmake \
-    libluajit-5.1-dev
+    libluajit-5.1-dev \
+    procps \
+    curl \
+    file \
+    git
 
-
+# Linuxbrew req
+# sudo apt-get install build-essential procps curl file git
 
 # locales
 locale-gen en_US.UTF-8
 update-locale LANG=en_US.UTF-8
 
-# nvim {{{
-mkdir -p ~/download && cd ~/download
-curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.tar.gz
 
-sudo rm -rf /opt/nvim-linux-x86_64
-sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
-sudo ln -sf /opt/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
-cd
-# }}}
+## brew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+brwe install \
+    fd \
+    rg \
+    bat \
+    fzf \
+    tmux \
+    nvim
+
+# brew で install に
+# # nvim {{{
+# mkdir -p ~/download && cd ~/download
+# curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.tar.gz
+# 
+# sudo rm -rf /opt/nvim-linux-x86_64
+# sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
+# sudo ln -sf /opt/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
+# cd
+# # }}}
 # Rust {{{
 
 ## req build-essential, clang (for tree-sitter-cli)
@@ -41,15 +59,15 @@ rustup component add rustfmt
 # }}}
 # python pip --break {{{
 
-## rust の package uv だけは強制的に導入。他は venv から
+## rust の package uv だけは強制的に導入。他は venv, pipx から
 pip3 install --break-system-packages uv
 
 # }}}
 
 
 # zsh plugin
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.config/zsh/plugins/zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.config/zsh/plugins/zsh-autosuggestions
+# git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.config/zsh/plugins/zsh-syntax-highlighting
+# git clone https://github.com/zsh-users/zsh-autosuggestions ~/.config/zsh/plugins/zsh-autosuggestions
 
 ## Starship
 curl -sS https://starship.rs/install.sh | sh -s -- -y
