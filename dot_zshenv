@@ -1,34 +1,66 @@
 
+# .config/zsh/.zshrc
+
 echo "  __reload zshenv__"
+path=(
+    "$HOME/bin"
+    "$HOME/.local/bin"
+    /usr/local/cuda-13.3/bin
+    $path
+)
 
-export PATH="$PATH:/mnt/c/Windows/"
-
-# PATH {{{
-# ~/bin/, ~/.config/bin/
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
+## WSL
+if [ -f /etc/wsl.conf ]; then
+    export PATH="$PATH:/mnt/c/Windows/"
 fi
 
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
-### }}}
+# ===========================
+#           Export
+# ===========================
 
-# ~/.zshenv
+# XDG Paths
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_STATE_HOME="$HOME/.local/state"
 
-compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
-
-export HISTFILE="$XDG_STATE_HOME"/zsh/history
-
+# zsh config dir
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
-export ZSH_PLUGINS="$ZDOTDIR"/plugins
+export HISTFILE="$XDG_STATE_HOME"/zsh/history ## ここか？
+
+# ===========================
+#           Added
+# ===========================
+
+# Added by cargo (Rust)
+. "$HOME/.cargo/env"
+
+# Added by lms (LM Studio CLI tool)
+export PATH="$PATH:$HOME/.lmstudio/bin"
+
+# Added by fnm Fast Node Manager (Node.js version manager)
+FNM_PATH="$HOME/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="$FNM_PATH:$PATH"
+  eval "$(fnm env --shell zsh)"
+fi
 
 # python3.13 or later
 # export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc
 export INPUTRC="$XDG_CONFIG_HOME"/readline/inputrc
 
-. "$HOME/.cargo/env"
+
+# ===========================
+#          typeset
+# ===========================
+
+# remove duplicate entries and non-existent directories.
+typeset -U PATH
+path=($^path(N-/))
+# 文法:
+# $^path 配列の要素それぞれに対して、直後のフラグを適用
+# (N-/)  zsh特有の GlobQualifier (ファイル修飾子)
+# -   `N`: null_glob ファイルが存在しない場合エラーをではなく空を返す
+# -   `-`: follow symlinks シンボリックリンクなら，リンク先を参照
+# -   `/`: directories ディレクトリのみにマッチさせる
+
