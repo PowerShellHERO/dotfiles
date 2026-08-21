@@ -27,6 +27,8 @@ vim.keymap.set('n', '<Leader>l', function()
     if ft == "lua" then
         -- Lua: require('...') の中身を選択
         pattern = [[\v^require\('\zs.*\ze'\)]]
+    elseif ft == "zsh" then
+        pattern = [[\v^zsh_add_file \zs.*\ze]]
     else
         -- markdownlink URL
         pattern = [[\v\]\(\zs.*\ze\)]]
