@@ -28,7 +28,7 @@ update-locale LANG=en_US.UTF-8
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-brwe install \
+brew install \
     fd \
     rg \
     bat \
