@@ -28,7 +28,7 @@ zsh_add_file() { [ -f "$1" ] && source "$1" }
 ##          SOURCE
 ## =========================
 
-zsh_add_file ~/.zshenv      ## 現在は工事中のため一緒にリロード。削除予定
+# zsh_add_file ~/.zshenv      ## 現在は工事中のため一緒にリロード。削除予定
 zsh_add_file "$ZDOTDIR"     ## for gf コメントアウトしてないけど何も起こりません
 zsh_add_file "$ZDOTDIR/zsh-functions.zsh"
 zsh_add_file "$ZDOTDIR/wsl.zsh"
