@@ -32,7 +32,7 @@ dotpush() {
     local fn=$(dotstatus)
     [[ "$fn" == "" ]] && success "not modified" && return 0
 
-    chezmoi diff $fn --reverse  | tail -n +6 | batcat -l diff
+    chezmoi diff $fn --reverse  | tail -n +6 | bat -l diff
     echo "Add and commit? [Enter to continue / q to quit]: "
     read -k ans # -k: read first char
     [[ "$ans" == "q" ]] && echo 'uit!' && return 0
