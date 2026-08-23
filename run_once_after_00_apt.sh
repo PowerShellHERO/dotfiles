@@ -34,6 +34,7 @@ brew install -y \
     bat \
     fzf \
     tmux \
+    vim \
     nvim
 
 # brew で install に
