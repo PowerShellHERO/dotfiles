@@ -82,3 +82,28 @@ vim.keymap.set("n", "gf", smart_gf)
 
 -- }}}
 
+
+-- edit after ftplugin
+
+
+vim.api.nvim_create_user_command("OpenAfterFtplugin", function()
+    -- Get the buffer's filetype: vim.bo.filetype
+    -- Get the Config's Path: vim.fn.stdpath("config")
+
+    local ft = vim.bo.filetype
+
+    if ft == "" then
+        vim.notify("filetype が設定されていません", vim.log.levels.WARN)
+        return
+    end
+
+    local path = vim.fs.joinpath(
+        vim.fn.stdpath("config"),
+        "after",
+        "ftplugin",
+        ft .. ".lua"
+    )
+
+    vim.cmd.edit(vim.fn.fnameescape(path))
+end, {})
+
