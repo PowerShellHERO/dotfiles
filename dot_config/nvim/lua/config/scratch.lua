@@ -13,14 +13,14 @@ vim.keymap.set('n', '<leader>i', 'gg=G<C-o>', { desc = 'Re-Indent buffer' })
 
 vim.opt.wildmode = "noselect"
 vim.api.nvim_create_autocmd("CmdlineChanged", {
-  pattern = ":",
-  callback = function ()
-    vim.fn.wildtrigger()
-  end
+    pattern = ":",
+    callback = function ()
+        vim.fn.wildtrigger()
+    end
 })
 
 -- Set Search Pattern
-vim.keymap.set('n', '<Leader>l', function()
+vim.keymap.set('n', '<C-i>', function()
     local ft = vim.bo.filetype
     local pattern = ""
 
@@ -36,6 +36,8 @@ vim.keymap.set('n', '<Leader>l', function()
 
     -- 検索レジスタ（/）にパターンをセット
     vim.fn.setreg("/", pattern)
+    -- 次の検索結果へ
+    vim.cmd('normal! n')
 
     print("Set Search pattern for" .. ft)
 end, { desc = "Set search pattern based on filetype" })
