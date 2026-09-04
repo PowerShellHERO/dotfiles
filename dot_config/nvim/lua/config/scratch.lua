@@ -109,3 +109,5 @@ vim.api.nvim_create_user_command("OpenAfterFtplugin", function()
     vim.cmd.edit(vim.fn.fnameescape(path))
 end, {})
 
+vim.keymap.set("n", "<Leader>f", vim.lsp.buf.format)
+
