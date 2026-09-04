@@ -1,5 +1,7 @@
 -- config.scratch
 
+--[[
+
     ----------------------
    --                  --
   --   nvim ubuntu    --
@@ -10,8 +12,11 @@
     -- d, new dir
     -- %, new file
 
+--]]
 
-function pp(v) print(vim.inspect(v)) end -- pretty print table
+function pp(v)
+    print(vim.inspect(v))
+end -- pretty print table
 
 require('config.options')
 require('config.keymaps')
@@ -20,9 +25,7 @@ require('config.lazy')
 
 -- users
 require('user.file_navigation').setup()
--- Comment out if not needed.
 require('config.wsl')
-
 
 -- abbreviations {{{
 
@@ -34,4 +37,4 @@ cabbr grep <Cmd>Telescope live_grep<CR>
 ]])
 
 -- }}}
-
+--

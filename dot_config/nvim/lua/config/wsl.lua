@@ -19,7 +19,6 @@ require('user.ime2')
 -- require('wsl.ime2')
 -- require('wsl.clip')
 
-
 -- YANK {{{
 -- for WSL
 local bin_path = '~/bin/'
@@ -29,11 +28,10 @@ if not vim.uv.fs_stat(vim.fn.expand(clip_path)) then
     return {}
 end
 
-
 local copycmd = "iconv -f utf-8 -t utf-16le | sed '1s/^\xFF\xFE//' | " .. clip_path
-local group = vim.api.nvim_create_augroup("Yank", { clear = true })
+local group = vim.api.nvim_create_augroup('Yank', { clear = true })
 
-vim.api.nvim_create_autocmd("TextYankPost", {
+vim.api.nvim_create_autocmd('TextYankPost', {
     group = group,
     callback = function()
         local yanked = vim.fn.getreg('"')
@@ -46,4 +44,3 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.keymap.set({ 'n', 'x' }, 'x', '"_x', { desc = 'Delete using blackhole register' })
 
 -- }}}
-

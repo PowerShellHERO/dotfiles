@@ -1,4 +1,3 @@
-
 -- Linux Ubuntu
 
 local keymap = vim.keymap.set
@@ -7,36 +6,35 @@ local opts = { noremap = true, silent = true }
 -- Leader Key
 vim.g.mapleader = ' '
 
-vim.keymap.set("n", "<Leader>cd", function()
+vim.keymap.set('n', '<Leader>cd', function()
     local current_file = vim.fn.expand('%:t')
-    local search_current_file = (current_file == "") and "" or  current_file
+    local search_current_file = (current_file == '') and '' or current_file
 
     vim.cmd([[
     :Oil
     set hlsearch
     ]])
-    vim.fn.setreg("/", current_file)
-
-end ,{ desc="Oil" })
-    -- vim.cmd.Ex()
-    --vim.cmd(search_current_file)
+    vim.fn.setreg('/', current_file)
+end, { desc = 'Oil' })
+-- vim.cmd.Ex()
+--vim.cmd(search_current_file)
 -- end ,{ desc="Netrw with Temporary Buffer" })
 
 -- EDIT VIMRC
 keymap('n', '<Space>o', '<cmd>edit $MYVIMRC<CR>', opts)
 -- :sou で十分な気がしてきた
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'lua', 'vim' },
-  callback = function()
-    keymap('n', '<Space>e', '<cmd>sou<CR>', { buffer = true, noremap = true, silent = true })
-  end
+    pattern = { 'lua', 'vim' },
+    callback = function()
+        keymap('n', '<Space>e', '<cmd>sou<CR>', { buffer = true, noremap = true, silent = true })
+    end,
 })
 
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'lua', 'vim' },
-  callback = function()
-    keymap('v', '<Space>e', "<ESC>:'<,'>lua<CR>", { buffer = true, noremap = true, silent = true })
-  end
+    pattern = { 'lua', 'vim' },
+    callback = function()
+        keymap('v', '<Space>e', "<ESC>:'<,'>lua<CR>", { buffer = true, noremap = true, silent = true })
+    end,
 })
 
 -- <Leader>8 "#+TITLE: " を挿入
@@ -44,8 +42,8 @@ vim.api.nvim_create_autocmd('FileType', {
 
 -- <Leader>9: 現在の日時を挿入（形式: %Y-%m-%d %H:%M:%S）
 vim.keymap.set('n', '<Leader>9', function()
-  local datetime = os.date('%Y-%m-%d %H:%M:%S')
-  vim.api.nvim_put({ datetime }, 'c', true, true)
+    local datetime = os.date('%Y-%m-%d %H:%M:%S')
+    vim.api.nvim_put({ datetime }, 'c', true, true)
 end, { noremap = true })
 
 vim.keymap.set('i', '<C-Space>', ' ', { noremap = true })
@@ -68,7 +66,7 @@ keymap('n', '<C-u>', 'u', opts)
 keymap('v', '<C-u>', '<ESC>:undo<CR>', opts)
 
 -- ESC, INSER:T
-keymap({'i','c'}, '<C-o>', '<Esc>', opts)
+keymap({ 'i', 'c' }, '<C-o>', '<Esc>', opts)
 keymap('v', '<C-o>', '<Esc>', opts)
 keymap('i', '<C-c>', '<C-o>', opts)
 -- keymap('n', 'o', 'o<Esc>o', opts)
@@ -114,7 +112,6 @@ keymap('n', '<C-z>', ':e!<CR>', opts)
 keymap('n', 'A', ':%y<CR>', opts)
 -- keymap('i', '<C-t>', '<Esc>ea', opts) -- used Tmux Leader Key
 keymap('n', '<C-e>', 'xhep', opts)
-
 
 vim.cmd([[
 " KILL {
@@ -171,8 +168,8 @@ nnoremap ; :
 -- -- MOVE: UP, DOWN
 -- keymap('n', 'k', 'gk', opts)
 -- keymap('n', 'n', 'gj', opts)
-vim.keymap.set("x", "n", "j")
-vim.keymap.set("x", "j", "n")
+vim.keymap.set('x', 'n', 'j')
+vim.keymap.set('x', 'j', 'n')
 -- keymap('c', '<C-k>', '<Up>', opts)
 -- keymap('c', '<C-n>', '<Down>', opts)
 -- keymap('i', '<C-k>', '<C-o>gk', opts)
@@ -180,7 +177,7 @@ vim.keymap.set("x", "j", "n")
 -- keymap('i', '<C-j>', '<C-n>', opts)
 -- keymap('n', 'u', '{zz', opts)
 -- keymap('n', 'e', '}zz', opts)
--- 
+--
 -- -- MOVE: LEFT, RIGHT
 -- keymap({'i','c'}, '<C-l>', '<Right>', opts)
 -- keymap('i', '<C-h>', '<Left>', opts)
@@ -196,21 +193,21 @@ vim.keymap.set("x", "j", "n")
 -- keymap('i', '<C-f>', '<C-o>w', opts)
 
 -- Move lines up/down
-keymap("n", "<A-n>", ":m .+1<CR>==",     { desc = "Move line down" })
-keymap("n", "<A-k>", ":m .-2<CR>==",     { desc = "Move line up" })
-keymap("v", "N", ":m '>+1<CR>gv=gv", { desc = "Move Selection down" })
-keymap("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move Selection up" })
+keymap('n', '<A-n>', ':m .+1<CR>==', { desc = 'Move line down' })
+keymap('n', '<A-k>', ':m .-2<CR>==', { desc = 'Move line up' })
+keymap('v', 'N', ":m '>+1<CR>gv=gv", { desc = 'Move Selection down' })
+keymap('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move Selection up' })
 
-keymap("n", "<", "V<gv")
-keymap("n", ">", "V>gv")
+keymap('n', '<', 'V<gv')
+keymap('n', '>', 'V>gv')
 
 -- Better indenting in visual mode
-keymap("v", "<", "<gv", { desc = "Indent left and reselect"})
-keymap("v", ">", ">gv", { desc = "Indent right and reselect"})
+keymap('v', '<', '<gv', { desc = 'Indent left and reselect' })
+keymap('v', '>', '>gv', { desc = 'Indent right and reselect' })
 
-keymap("n", "<Leader>m", function() print('a') end, { desc = "ii"})
+keymap('n', '<Leader>m', function()
+    print('a')
+end, { desc = 'ii' })
 
 -- test
 keymap('v', 'gp', 'gq', opts)
-
-

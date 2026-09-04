@@ -1,33 +1,29 @@
-
-
 -- ここでテスト -> 設定ファイルに追加
 
-
 -- JAPANESE WRITING (vip gq) or gp -> config.keymaps
-vim.opt.textwidth  = 74
-vim.opt.formatexpr = "autofmt#japanese#formatexpr()"
+vim.opt.textwidth = 74
+vim.opt.formatexpr = 'autofmt#japanese#formatexpr()'
 -- vim.opt.wrap = true
 
 vim.keymap.set('n', '<leader>i', 'gg=G<C-o>', { desc = 'Re-Indent buffer' })
 
-
-vim.opt.wildmode = "noselect"
-vim.api.nvim_create_autocmd("CmdlineChanged", {
-    pattern = ":",
-    callback = function ()
+vim.opt.wildmode = 'noselect'
+vim.api.nvim_create_autocmd('CmdlineChanged', {
+    pattern = ':',
+    callback = function()
         vim.fn.wildtrigger()
-    end
+    end,
 })
 
 -- Set Search Pattern
 vim.keymap.set('n', '<C-i>', function()
     local ft = vim.bo.filetype
-    local pattern = ""
+    local pattern = ''
 
-    if ft == "lua" then
+    if ft == 'lua' then
         -- Lua: require('...') の中身を選択
         pattern = [[\v^require\('\zs.*\ze'\)]]
-    elseif ft == "zsh" then
+    elseif ft == 'zsh' then
         pattern = [[\v^zsh_add_file \zs.*\ze]]
     else
         -- markdownlink URL
@@ -35,12 +31,12 @@ vim.keymap.set('n', '<C-i>', function()
     end
 
     -- 検索レジスタ（/）にパターンをセット
-    vim.fn.setreg("/", pattern)
+    vim.fn.setreg('/', pattern)
     -- 次の検索結果へ
     vim.cmd('normal! n')
 
-    print("Set Search pattern for" .. ft)
-end, { desc = "Set search pattern based on filetype" })
+    print('Set Search pattern for' .. ft)
+end, { desc = 'Set search pattern based on filetype' })
 
 -- Issue: <C-w> をシステムが定義しているため消せない。
 -- やりたいこと: Windows 移動を <C-w> だけで簡潔させる。
@@ -61,13 +57,13 @@ local function smart_gf()
     -- バッファが変わってたら終了
 
     local cmd
-    local move_patterns = {":", "f(", "f`", 'f"', "f " }
+    local move_patterns = { ':', 'f(', 'f`', 'f"', 'f ' }
 
     local bufname = vim.api.nvim_buf_get_name(0)
 
     for _, v in ipairs(move_patterns) do
         -- 次の記号 (, `, ", \s に移動して gf
-        cmd = string.format("silent! normal! %sgf", v)
+        cmd = string.format('silent! normal! %sgf', v)
         -- print (cmd)
         vim.cmd(cmd)
 
@@ -77,37 +73,29 @@ local function smart_gf()
         end
     end
 
-    vim.notify("File not found", vim.log.levels.WARN)
+    vim.notify('File not found', vim.log.levels.WARN)
 end
 
-vim.keymap.set("n", "gf", smart_gf)
+vim.keymap.set('n', 'gf', smart_gf)
 
 -- }}}
 
-
 -- edit after ftplugin
 
-
-vim.api.nvim_create_user_command("OpenAfterFtplugin", function()
+vim.api.nvim_create_user_command('OpenAfterFtplugin', function()
     -- Get the buffer's filetype: vim.bo.filetype
     -- Get the Config's Path: vim.fn.stdpath("config")
 
     local ft = vim.bo.filetype
 
-    if ft == "" then
-        vim.notify("filetype が設定されていません", vim.log.levels.WARN)
+    if ft == '' then
+        vim.notify('filetype が設定されていません', vim.log.levels.WARN)
         return
     end
 
-    local path = vim.fs.joinpath(
-        vim.fn.stdpath("config"),
-        "after",
-        "ftplugin",
-        ft .. ".lua"
-    )
+    local path = vim.fs.joinpath(vim.fn.stdpath('config'), 'after', 'ftplugin', ft .. '.lua')
 
     vim.cmd.edit(vim.fn.fnameescape(path))
 end, {})
 
-vim.keymap.set("n", "<Leader>f", vim.lsp.buf.format)
-
+vim.keymap.set('n', '<Leader>f', vim.lsp.buf.format)
