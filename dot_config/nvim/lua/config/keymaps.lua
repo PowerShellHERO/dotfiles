@@ -198,8 +198,8 @@ vim.keymap.set("x", "j", "n")
 -- Move lines up/down
 keymap("n", "<A-n>", ":m .+1<CR>==",     { desc = "Move line down" })
 keymap("n", "<A-k>", ":m .-2<CR>==",     { desc = "Move line up" })
-keymap("v", "<A-n>", ":m '>+1<CR>gv=gv", { desc = "Move Selection down" })
-keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move Selection up" })
+keymap("v", "N", ":m '>+1<CR>gv=gv", { desc = "Move Selection down" })
+keymap("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move Selection up" })
 
 keymap("n", "<", "V<gv")
 keymap("n", ">", "V>gv")
