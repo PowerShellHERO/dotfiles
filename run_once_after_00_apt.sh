@@ -37,7 +37,9 @@ brew install -y \
     fzf \
     tmux \
     vim \
-    nvim
+    nvim \
+    node \
+    npm
 
 # brew で install に
 # # nvim {{{
