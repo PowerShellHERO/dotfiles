@@ -2,6 +2,7 @@
 
 sudo -v
 
+sudo apt update && apt upgrade -y
 sudo apt install -y \
     locales \
     python3 \
@@ -10,6 +11,7 @@ sudo apt install -y \
     clang \
     unzip \
     cmake \
+    wget \
     libluajit-5.1-dev \
     procps \
     curl \
@@ -77,6 +79,4 @@ echo ""
 echo "--- run_once: apt install DONE ---"
 echo ""
 
-## 'source zshrc' は手動でするしかないかも？
-## zsh 用の script に分けてもダメだった。
 
