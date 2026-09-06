@@ -34,6 +34,10 @@ vim.cmd([[
 cabbr add !chezmoi add %
 cabbr ya %y
 cabbr grep <Cmd>Telescope live_grep<CR>
+" :Telescope oldfiles'
+cabbr nof <Cmd>Telescope oldfiles<CR>
+" :cd this directory
+cabbr cdp <Cmd>cd %:p:h<CR>
 ]])
 
 -- }}}
