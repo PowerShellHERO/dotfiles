@@ -125,11 +125,11 @@ nnoremap k gk
 nnoremap n gj
 " vnoremap n j
 " vnoremap j n
-cnoremap <C-k> <C-p>
-cnoremap <C-n> <C-n>
 
-inoremap <C-k> <UP>
-inoremap <C-n> <DOWN>
+" noremap! == inore + cnore
+noremap! <C-k> <UP>
+noremap! <C-n> <DOWN>
+
 " inoremap <C-k> <C-o>gk
 " inoremap <C-n> <C-o>gj
 inoremap <C-j> <C-n>
