@@ -209,5 +209,8 @@ keymap('n', '<Leader>m', function()
     print('a')
 end, { desc = 'ii' })
 
+-- copy
+keymap('v', 'p', 'P', opts)
+
 -- test
 keymap('v', 'gp', 'gq', opts)
