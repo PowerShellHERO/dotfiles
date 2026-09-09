@@ -15,6 +15,14 @@ vim.api.nvim_create_autocmd('CmdlineChanged', {
     end,
 })
 
+-- Find -> Recursive fuzzy
+function _G.my_find(text, _)
+    local files = vim.fn.glob("**/*", true, true)
+
+    return vim.fn.matchfuzzy(files, text)
+end
+vim.opt.findfunc = "v:lua.my_find"
+
 -- Set Search Pattern
 vim.keymap.set('n', '<C-i>', function()
     local ft = vim.bo.filetype
