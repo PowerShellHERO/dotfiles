@@ -106,23 +106,31 @@ keymap('n', 'zr', 'zX', opts)
 keymap('i', '<C-v>', '<Esc>v', opts)
 keymap('n', 'vat', 'va<', opts)
 keymap('n', 'vit', 'vi<', opts)
--- keymap('n', 'd,', 'dt，', opts)
--- keymap('n', 'd.', 'df。', opts)
 keymap('n', '<C-z>', ':e!<CR>', opts)
 keymap('n', 'A', ':%y<CR>', opts)
 -- keymap('i', '<C-t>', '<Esc>ea', opts) -- used Tmux Leader Key
 keymap('n', '<C-e>', 'xhep', opts)
 
+-- keymap('n', 'd,', 'dt，', opts)
+-- keymap('n', 'd.', 'df。', opts)
+local function move_to(chars)
+    local chars = '[' .. chars .. ']'
+    vim.fn.search(chars, 'W', vim.fn.line('.'))
 
-vim.keymap.set("o", ",", function()
-    vim.fn.search("[,.，、。]", "W", vim.fn.line("."))
-end, { desc = "move to ,/./，/。/、" })
+    local col = vim.api.nvim_win_get_cursor(0)[2] -- 0-indexedの列番号
+    local char = vim.api.nvim_get_current_line():sub(col + 1, col + 1)
+    if string.find(chars, char) then
+        vim.cmd('normal! l')
+    end
+end
 
-vim.keymap.set("o", ".", function()
-    vim.fn.search("[.。]", "W", vim.fn.line("."))
-end, { desc = "move to ./。" })
+vim.keymap.set('o', '.', function()
+    move_to('.。')
+end, { desc = 'move to ./。' })
 
-
+vim.keymap.set('o', ',', function()
+    move_to(',.，、。')
+end, { desc = 'move to ,/./，/。/、' })
 
 vim.cmd([[
 " KILL {
