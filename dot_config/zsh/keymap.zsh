@@ -3,6 +3,19 @@
 
 # alias もここか？　もしかして。
 
+# funcs {{{
+
+forward-char-or-clear() {
+    if [[ -z $BUFFER ]]; then
+        zle clear-screen
+    else
+        zle forward-char
+    fi
+}
+zle -N forward-char-or-clear
+
+# ## }}}
+
 # Ctrl = "^" or "\C-"
 # Alt  = "^[" or "\e"
 
@@ -11,7 +24,7 @@ bindkey "^e" end-of-line             # END
 bindkey "^d" backward-delete-char    # BS
 # ^k / ^n -> :History_and_Completion # 上/下
 bindkey "^h" backward-char           # 左
-bindkey "^l" forward-char            # 右
+bindkey "^l" forward-char-or-clear   # 右 or clear
 bindkey "^z" undo                    # Undo
 
 bindkey "^b" backward-word
