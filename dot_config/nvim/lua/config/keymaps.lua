@@ -15,9 +15,6 @@ vim.keymap.set('n', '<Leader>cd', function()
     ]])
     vim.fn.setreg('/', current_file)
 end, { desc = 'Oil' })
--- vim.cmd.Ex()
---vim.cmd(search_current_file)
--- end ,{ desc="Netrw with Temporary Buffer" })
 
 -- EDIT VIMRC
 keymap('n', '<Space>o', '<cmd>edit $MYVIMRC<CR>', opts)
@@ -48,12 +45,6 @@ end, { noremap = true })
 vim.keymap.set('i', '<C-Space>', ' ', { noremap = true })
 
 -- SAVE, CLOSE
--- <C-u> は，直前のコマンドライン入力を先頭まで消去する意味で使われている。
--- モダンな書き方は， <cmd> を使うことで，<C-u> を使うのと同等に安全であるし
--- 推奨された書き方。
--- keymap('n', '<Leader>w', ':<C-u>w<CR>', opts)
--- keymap('n', '<Leader>q', ':<C-u>bdel<CR>', opts)
-
 keymap('n', '<Leader>w', '<cmd>w<CR>', opts)
 keymap('n', '<Leader>q', '<cmd>bdel<CR>', opts)
 
@@ -84,10 +75,6 @@ keymap('n', '=', '<cmd>bprevious<CR>', opts)
 keymap('n', '<C-o>', "m'Gzt", opts)
 
 keymap('n', '<C-c>', '<C-o>', opts)
-
--- USABILITY (なんか挙動がおかしいので，vim.cmd で設定)
--- keymap('n', ';', ':', opts)
--- keymap('v', ';', ':', opts)
 
 -- ZZs
 keymap('n', '<C-n>', 'nzz', opts)
@@ -134,7 +121,7 @@ end, { desc = 'move to ,/./，/。/、' })
 vim.cmd([[
 " KILL {
 
-    noremap! <C-d> <C-h>
+noremap! <C-d> <C-h>
 
 " }
 " MOVE: UP, DOWN {
@@ -178,37 +165,14 @@ inoremap <C-f> <C-o>w
 " （最後の保存か）バッファが開かれた時の状態に戻す。undo 可能
 nnoremap <C-z> :e!<CR>
 
-" USABILITY
+" USABILITY (なんか挙動がおかしいので，vim.cmd で設定)
 nnoremap ; :
 
 "" }
 ]])
 -- -- MOVE: UP, DOWN
--- keymap('n', 'k', 'gk', opts)
--- keymap('n', 'n', 'gj', opts)
 vim.keymap.set('x', 'n', 'j')
 vim.keymap.set('x', 'j', 'n')
--- keymap('c', '<C-k>', '<Up>', opts)
--- keymap('c', '<C-n>', '<Down>', opts)
--- keymap('i', '<C-k>', '<C-o>gk', opts)
--- keymap('i', '<C-n>', '<C-o>gj', opts)
--- keymap('i', '<C-j>', '<C-n>', opts)
--- keymap('n', 'u', '{zz', opts)
--- keymap('n', 'e', '}zz', opts)
---
--- -- MOVE: LEFT, RIGHT
--- keymap({'i','c'}, '<C-l>', '<Right>', opts)
--- keymap('i', '<C-h>', '<Left>', opts)
--- keymap('i', '<C-e>', '<End>', opts)
--- keymap('i', '<C-u>', '<Esc>^i', opts)
--- keymap('c', '<C-u>', '<Home>', opts)
--- keymap('n', 'L', '$', opts)
--- keymap('n', 'H', '^', opts)
--- keymap('n', '<C-l>', 'A', opts)
--- keymap('v', '<C-h>', 'I', opts)
--- keymap('v', '<C-l>', '$A', opts)
--- keymap('i', '<C-b>', '<C-o>b', opts)
--- keymap('i', '<C-f>', '<C-o>w', opts)
 
 -- Move lines up/down
 keymap('n', '<A-n>', ':m .+1<CR>==', { desc = 'Move line down' })
