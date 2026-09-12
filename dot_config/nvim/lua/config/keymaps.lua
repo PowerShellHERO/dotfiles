@@ -106,12 +106,23 @@ keymap('n', 'zr', 'zX', opts)
 keymap('i', '<C-v>', '<Esc>v', opts)
 keymap('n', 'vat', 'va<', opts)
 keymap('n', 'vit', 'vi<', opts)
-keymap('n', 'd,', 'dt，', opts)
-keymap('n', 'd.', 'df。', opts)
+-- keymap('n', 'd,', 'dt，', opts)
+-- keymap('n', 'd.', 'df。', opts)
 keymap('n', '<C-z>', ':e!<CR>', opts)
 keymap('n', 'A', ':%y<CR>', opts)
 -- keymap('i', '<C-t>', '<Esc>ea', opts) -- used Tmux Leader Key
 keymap('n', '<C-e>', 'xhep', opts)
+
+
+vim.keymap.set("o", ",", function()
+    vim.fn.search("[,.，、。]", "W", vim.fn.line("."))
+end, { desc = "move to ,/./，/。/、" })
+
+vim.keymap.set("o", ".", function()
+    vim.fn.search("[.。]", "W", vim.fn.line("."))
+end, { desc = "move to ./。" })
+
+
 
 vim.cmd([[
 " KILL {
