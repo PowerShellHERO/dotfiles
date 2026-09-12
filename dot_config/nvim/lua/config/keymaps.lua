@@ -8,7 +8,6 @@ vim.g.mapleader = ' '
 
 vim.keymap.set('n', '<Leader>cd', function()
     local current_file = vim.fn.expand('%:t')
-    local search_current_file = (current_file == '') and '' or current_file
 
     vim.cmd([[
     :Oil
