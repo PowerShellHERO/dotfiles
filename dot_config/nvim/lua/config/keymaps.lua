@@ -39,7 +39,7 @@ vim.api.nvim_create_autocmd('FileType', {
 -- <Leader>9: 現在の日時を挿入（形式: %Y-%m-%d %H:%M:%S）
 vim.keymap.set('n', '<Leader>9', function()
     local datetime = os.date('%Y-%m-%d %H:%M:%S')
-    vim.api.nvim_put({ datetime }, 'c', true, true)
+    vim.api.nvim_put({ '### ' .. datetime }, 'c', true, true)
 end, { noremap = true })
 
 vim.keymap.set('i', '<C-Space>', ' ', { noremap = true })
