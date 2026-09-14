@@ -1,7 +1,7 @@
 -- ここでテスト -> 設定ファイルに追加
 
 -- JAPANESE WRITING (vip gq) or gp -> config.keymaps
-vim.opt.textwidth = 74
+vim.opt.textwidth = 63
 vim.opt.formatexpr = 'autofmt#japanese#formatexpr()'
 -- vim.opt.wrap = true
 
