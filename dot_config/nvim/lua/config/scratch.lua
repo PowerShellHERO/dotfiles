@@ -90,7 +90,7 @@ vim.keymap.set('n', 'gf', smart_gf)
 
 -- edit after ftplugin
 
-vim.api.nvim_create_user_command('OpenAfterFtplugin', function()
+vim.api.nvim_create_user_command('EditAfterFtplugin', function()
     -- Get the buffer's filetype: vim.bo.filetype
     -- Get the Config's Path: vim.fn.stdpath("config")
 
@@ -107,3 +107,30 @@ vim.api.nvim_create_user_command('OpenAfterFtplugin', function()
 end, {})
 
 vim.keymap.set('n', '<Leader>f', vim.lsp.buf.format)
+
+-- git blame
+-- --  現在行の Git blame（作者と日時まで）を簡易表示
+vim.api.nvim_create_user_command('Blame', function()
+  -- 現在の行番号とファイルパスを取得
+  local line = vim.fn.line('.')
+  local file = vim.fn.expand('%')
+
+  -- git blame コマンドを実行して結果を取得
+  local cmd = string.format('git blame -L %d,%d %s', line, line, vim.fn.shellescape(file))
+  local result = vim.fn.system(cmd)
+
+  -- エラー時やGit管理外のファイルの場合はそのまま表示して終了
+  if vim.v.shell_error ~= 0 or result == '' then
+    print(result)
+    return
+  end
+
+  -- ')' の位置を探して、それ以降（コード本文）をカットする
+  local paren_pos = string.find(result, '%)')
+  if paren_pos then
+    result = string.sub(result, 1, paren_pos)
+  end
+
+  -- 改行コードを取り除いて表示
+  print(vim.trim(result))
+end, {})
