@@ -1,6 +1,6 @@
-
 vim.opt_local.expandtab = false
-vim.opt.suffixesadd:append({ '.txt', '.md' })
+vim.opt_local.suffixesadd:append({ '.txt', '.md' })
+vim.opt_local.conceallevel = 2
 
 local function set_iabbrs()
     vim.cmd([[ """ iabbrs
@@ -372,3 +372,39 @@ vim.api.nvim_create_user_command('EngShorthand', set_iabbrs, { nargs = 0, desc =
 vim.api.nvim_create_user_command('EngShorthandClear', function()
     vim.cmd('iabclear')
 end, { nargs = 0, desc = 'Disabled Eng short hand mode' })
+
+-- colors
+local terminal_green = '#00ff00'
+local dull_pink      = '#ff30ff'
+local asa_suou       = '#a25768'
+local asa_gi         = '#00A4AC'
+local asa_gi_dm      = '#52F2FA'
+local nameless_green = '#00F090'
+local orange         = '#ff9000'
+
+-- override color
+vim.api.nvim_set_hl(0, '@markup.strong.markdown_inline', {
+    fg = terminal_green,
+    bold = true,
+})
+
+vim.api.nvim_set_hl(0, '@markup.italic.markdown_inline', {
+    -- fg = '#c080ff',
+    -- bg = '#a246fc'
+    -- bg = '#830df8',
+    -- fg = '#F0F0F0',
+    -- fg = '#D370ff',
+    fg = dull_pink,
+    italic = false,
+    bold = true,
+})
+
+vim.api.nvim_set_hl(0, '@markup.link.label.markdown_inline', {
+    underline = true,
+    fg = asa_gi,
+})
+
+vim.api.nvim_set_hl(0, '@markup.code_block', {
+    fg = asa_suou,
+    conceal = false,
+})
