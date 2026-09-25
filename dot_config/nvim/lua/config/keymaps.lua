@@ -196,3 +196,7 @@ keymap('v', 'p', 'P', opts)
 
 -- test
 keymap('v', 'gp', 'gq', opts)
+keymap('n', 'go', function()
+    -- 'go', 'gO' だとダメぽ
+    vim.cmd('normal gO')
+end, opts) -- show outline
