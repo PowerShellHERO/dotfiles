@@ -68,28 +68,54 @@ alias :q=exit\ 0
 ## `:only`: tmux kill-window -a {{{
 
 :only() {
-    if [[ -n "$TMUX" ]]; then
-        tmux kill-window -a
+    if [[ ! -n "$TMUX" ]]; then
+        warn "tmux isn't running"
+        return 0
     fi
+
+    tmux kill-window -a
 }
 
 ## }}}
 ## `:o`   : only a remains vim window {{{
 
 # kill-all except vim
-
+# -   vim が動いている window に移動する。
+# -   vim が動いてない window をできるだけ削除。
 only_a_remains_vim_window() {
-    # print window id and current command in this sessoin
-    # -> filter commands with not include vim (grep -v = inverse)
-    # -> cut for window_id
-    # -> tmux kill-window
-    if [[ -n "$TMUX" ]]; then
+    if [[ ! -n "$TMUX" ]]; then
+        warn "tmux isn't running"
+        return 0
+    fi
+
+    local is_vim_running
+    tmux list-panes -s -F '#{window_id} #{pane_current_command}' | \
+         grep vim | tail -n 1 | read is_vim_running
+
+    tmux select-window $is_vim_running
+
+    if test $is_vim_running ; then
         tmux list-panes -s -F '#{window_id} #{pane_current_command}' | \
-        grep -v vim | \
-        cut -d ' ' -f1 | \
-        xargs -I{} tmux kill-window -t {}
+            grep -v vim | \
+            cut -d ' ' -f1 | \
+            xargs -I{} tmux kill-window -t {}
+    else
+        tmux kill-window -a
     fi
 }
+
+# only_a_remains_vim_window() {
+#     # print window id and current command in this sessoin
+#     # -> filter commands with not include vim (grep -v = inverse)
+#     # -> cut for window_id
+#     # -> tmux kill-window
+#     if [[ -n "$TMUX" ]]; then
+#         tmux list-panes -s -F '#{window_id} #{pane_current_command}' | \
+#         grep -v vim | \
+#         cut -d ' ' -f1 | \
+#         xargs -I{} tmux kill-window -t {}
+#     fi
+# }
 alias :o=only_a_remains_vim_window
 
 ## }}}
