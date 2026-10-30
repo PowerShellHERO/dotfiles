@@ -3,6 +3,7 @@
 -- JAPANESE WRITING (vip gq) or gp -> config.keymaps
 vim.opt.textwidth = 74
 vim.opt.formatexpr = 'autofmt#japanese#formatexpr()'
+vim.opt.formatoptions:append('mB') -- single byte 文字の行連結で空白を足す
 -- vim.opt.wrap = true
 
 vim.keymap.set('n', '<leader>i', 'gg=G<C-o>', { desc = 'Re-Indent buffer' })
