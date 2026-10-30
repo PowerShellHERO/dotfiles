@@ -343,3 +343,91 @@ gg() {
 
 ## }}}
 
+## Tmux {{{
+
+# ### New Session
+# 
+# new-session() {
+#   local name="$1"
+# 
+#   if [[ -n "$TMUX" ]]; then
+#     if [[ -n "$name" ]]; then
+#       tmux new-session -ds "$name" \; switch-client -t "$name"
+#     else
+#       tmux new-session -d \; switch-client -n
+#     fi
+#   else
+#     if [[ -n "$name" ]]; then
+#       tmux new-session -s "$name"
+#     else
+#       tmux new-session
+#     fi
+#   fi
+# }
+#
+#
+### Attach Session
+
+# :a() {
+#     local session
+#     session=$(tmux list-sessions -F '#{session_name} #{?session_attached}' \
+#        | fzf --prompt="Attach tmux> " \
+#        | awk '{print $1}')
+# 
+#     [[ -n "$session" ]] && new-session "$session"
+# }
+
+:a() {
+    local result query selection
+    
+    result=$(tmux list-sessions -F '#{session_name}' |
+           fzf --print-query --prompt="Session> ")
+    
+    exit_code=$?
+    
+    query=$(echo "$result" | sed -n '1p')
+    selection=$(echo "$result" | sed -n '2p')
+    
+    # echo code = $exit_code
+    # echo $query
+    # echo $selection
+    
+    if [ $exit_code -eq 130 ]; then
+        # fzf Cancel なら return
+        echo Cancel
+        return
+    fi 
+    
+    if [[ ! -n "$TMUX" ]]; then
+        tmux new-session -s "$query"
+    fi 
+    
+    if [[ -n "$selection" ]]; then
+    
+        tmux switch-client -t "$selection" 2>/dev/null ||
+        tmux attach-session -t "$selection"
+    elif [[ -n "$query" ]]; then
+    
+        tmux new-session -ds "$query" \; switch-client -t "$query"
+    fi
+}
+
+
+## Detach Session
+
+:d() {
+if [[ -n "$TMUX" ]]; then
+    tmux detach
+fi
+}
+
+## Rename Session
+
+:r() {
+if [[ -n "$TMUX" ]]; then
+   tmux rename-session $1
+fi
+}
+
+# }}}
+
