@@ -5,14 +5,23 @@
 
 # funcs {{{
 
-forward-char-or-clear() {
+# forward-char-or-clear() {
+#     if [[ -z $BUFFER ]]; then
+#         zle clear-screen
+#     else
+#         zle forward-char
+#     fi
+# }
+# zle -N forward-char-or-clear
+
+end-of-line-or-clear() {
     if [[ -z $BUFFER ]]; then
         zle clear-screen
     else
-        zle forward-char
+        zle end-of-line
     fi
 }
-zle -N forward-char-or-clear
+zle -N end-of-line-or-clear
 
 # ## }}}
 
@@ -20,11 +29,11 @@ zle -N forward-char-or-clear
 # Alt  = "^[" or "\e"
 
 bindkey "^u" beginning-of-line       # HOME
-bindkey "^e" end-of-line             # END
+bindkey "^e" end-of-line-or-clear    # END
 bindkey "^d" backward-delete-char    # BS
 # ^k / ^n -> :History_and_Completion # 上/下
 bindkey "^h" backward-char           # 左
-bindkey "^l" forward-char-or-clear   # 右 or clear
+bindkey "^l" forward-char   # 右 or clear
 bindkey "^z" undo                    # Undo
 
 bindkey "^b" backward-word
