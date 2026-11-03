@@ -135,3 +135,51 @@ vim.api.nvim_create_user_command('Blame', function()
   -- 改行コードを取り除いて表示
   print(vim.trim(result))
 end, {})
+
+-- list
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "markdown" },
+    callback = function(args)
+        vim.keymap.set("i", "<Space>", function()
+            -- カーソルより左の文字列を取得
+            local before = vim.api.nvim_get_current_line():sub(1, vim.fn.col(".") - 1)
+            local bullet = "*   "
+
+            -- 行頭，またはタブだけが続いている -> リスト開始
+            if before:match("^\t*$") then
+                return bullet
+            end
+
+            -- リスト (bullet) の直後 -> インデント増
+            if before:match("^\t*%*   $") then
+                print("a")
+                return "<C-w>\t" .. bullet
+                -- return "<Cmd>normal! >>A<CR>" -- 着地位置が変なのでダメ
+                -- return "<BS><BS><BS><BS><Tab>" .. bullet
+            end
+
+            return " "
+        end, { buffer = args.buf, expr = true, desc = "space で bullet 挿入" })
+    end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "markdown" },
+    callback = function(args)
+        -- <C-h>
+        vim.keymap.set("i", "<C-w>", function()
+            -- カーソルより左の文字列を取得
+            local before = vim.api.nvim_get_current_line():sub(1, vim.fn.col(".") - 1)
+            local bullet = "*   "
+
+            -- インデントされたリスト -> インデント減
+            if before:match("^\t+%*   $") then
+                return "<C-w><BS>" .. bullet
+                -- return "<Cmd>normal! <<<CR>" -- カーソル位置がやっぱり変
+            end
+
+            return "<C-w>"
+        end, { buffer = args.buf, expr = true, desc = "space で bullet 挿入" })
+    end,
+})
+
