@@ -136,7 +136,7 @@ vim.api.nvim_create_user_command('Blame', function()
   print(vim.trim(result))
 end, {})
 
--- list
+-- list or List Indent
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "markdown" },
     callback = function(args)
@@ -163,6 +163,7 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+-- delist or List dedent
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "markdown" },
     callback = function(args)
