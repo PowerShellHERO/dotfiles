@@ -42,7 +42,7 @@ vim.keymap.set('n', '<C-i>', function()
     -- 検索レジスタ（/）にパターンをセット
     vim.fn.setreg('/', pattern)
     -- 次の検索結果へ
-    vim.cmd('normal! n')
+    vim.cmd('silent! normal! n')
 
     print('Set Search pattern for' .. ft)
 end, { desc = 'Set search pattern based on filetype' })
@@ -182,5 +182,37 @@ vim.api.nvim_create_autocmd("FileType", {
             return "<C-w>"
         end, { buffer = args.buf, expr = true, desc = "space で bullet 挿入" })
     end,
+})
+
+-- abbreviations for search
+--
+-- search
+local g_search_aliases = {
+  t = 'TODO',
+  -- 複数候補は正規表現の OR にする
+  -- ただし，filetype ごとに設定した方がいいと思う。
+  f = [[function\|def\>]],
+  h = '^## ',
+}
+
+-- local aliases
+-- after/ftplugin に `search_aliases = []`
+-- という定義を持っていれば filetype ごとに追加。
+
+vim.api.nvim_create_autocmd('CmdlineLeave', {
+  pattern = { '/', '?' },
+  callback = function()
+    -- <Esc> でキャンセルした場合は何もしない
+    if vim.v.event.abort then return end
+
+    local line = vim.fn.getcmdline()
+
+    -- buffer-local を優先し、無ければグローバルを使う
+    local local_aliases = vim.b.search_aliases or {}
+    local repl = local_aliases[line] or g_search_aliases[line]
+    if repl then
+      vim.fn.setcmdline(repl)
+    end
+  end,
 })
 
