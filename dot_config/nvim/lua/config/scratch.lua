@@ -185,7 +185,9 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- abbreviations for search
---
+-- *   一文字で検索するわけないんだから，代わりに別のものを検索する。
+-- *   でも cabbr を使うのも危険な気がする
+-- *   比較的安全そうな方法で実装
 -- search
 local g_search_aliases = {
   t = 'TODO',
