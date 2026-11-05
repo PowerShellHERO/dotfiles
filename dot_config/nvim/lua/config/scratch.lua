@@ -196,7 +196,39 @@ local g_search_aliases = {
 }
 
 -- local aliases
--- after/ftplugin に `search_aliases = []`
+-- after/ftplugin に `vim.b.search_aliases = []`
+-- という定義を持っていれば filetype ごとに追加。
+
+vim.api.nvim_create_autocmd('CmdlineLeave', {
+  pattern = { '/', '?' },
+  callback = function()
+    -- <Esc> でキャンセルした場合は何もしない
+    if vim.v.event.abort then return end
+
+    local line = vim.fn.getcmdline()
+
+    -- buffer-local を優先し、無ければグローバルを使う
+    local local_aliases = vim.b.search_aliases or {}
+    local repl = local_aliases[line] or g_search_aliases[line]
+    if repl then
+      vim.fn.setcmdline(repl)
+    end
+  end,
+})
+
+-- abbreviations for search
+--
+-- search
+local g_search_aliases = {
+  t = 'TODO',
+  -- 複数候補は正規表現の OR にする
+  -- ただし，filetype ごとに設定した方がいいと思う。
+  f = [[function\|def\>]],
+  h = '^## ',
+}
+
+-- local aliases
+-- after/ftplugin に `vim.b.search_aliases = []`
 -- という定義を持っていれば filetype ごとに追加。
 
 vim.api.nvim_create_autocmd('CmdlineLeave', {
