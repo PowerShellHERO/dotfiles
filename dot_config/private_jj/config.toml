@@ -1,0 +1,22 @@
+#:schema https://docs.jj-vcs.dev/latest/config-schema.json
+
+[ui]
+## clear とか付ける方法はない。
+default-command = ["log", "-n", "6"]
+
+diff-editor = "oyui"
+diff-instructions = false
+
+editor = ["nvim", "-c", "setfiletype markdown", "-c", "set syntax=jjdescription"]
+
+[user]
+name = "Monapo"
+email = "monapo@quietest"
+
+[ui.graph]
+style = "ascii-large"
+
+[merge-tools.oyui]
+program = "oyui"
+edit-args = ["diff", "$left", "$right"]
+
