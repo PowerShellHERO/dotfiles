@@ -281,32 +281,16 @@ sora() { # Time and weather
 ##           :go_to
 ## ===============================
 
-# Ubunts では，コア以外のアプリは homebrew を使う。
-# /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-# rm ~/.local/bin/fd
-# rm ~/.local/bin/fzf
-# rm ~/.local/bin/bat
-# sudo apt remove fd-find
-# sudo apt remove batcat
-# sudo apt remove fzf
-# brew install fd bat fzf
-# FZF
-
-# [TODO] vim_oldfile()
-
-# ## 
-# export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git" 
-# export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # export FZF_DEFAULT_OPTS="--height 50% --layout=default --border --color=hl:#2dd4bf"
 # export FZF_TMUX_OPTS=" -p90%,70% "
-# ## 
 
-export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git" 
+export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude '.*' --exclude '_*'" 
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd --type d --hidden --strip-cwd-prefix --exclude '.*' --exclude '_*'" 
 export FZF_DEFAULT_OPTS="--height 50% --layout=default --border --color=hl:#2dd4bf"
 export FZF_TMUX_OPTS=" -p90%,70% "
 
+# fzf-cd-widget == -ALT_C_COMMAND 適応
 bindkey '^o' fzf-cd-widget
 
 ### fman: compgen search with fzf {{{
