@@ -24,6 +24,8 @@ return {
 
         telescope.setup({
             defaults = {
+                find_command = { 'fd', '--type', 'f', '--strip-cwd-prefix', '--hidden', '--exclude', '.*', '--exclude', '_*' },
+
                 -- Default configuration for telescope goes here:
                 -- config_key = value,
                 mappings = {
