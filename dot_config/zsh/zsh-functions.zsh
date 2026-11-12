@@ -25,7 +25,8 @@ so() { # reload zshrc
 ### }}}
 ## Source file / Install plugin {{{
 
-export ZSH_PLUGINS="$ZDOTDIR"/plugins
+# plugins は隠しファイルに。検索除外の為
+export ZSH_PLUGINS="$ZDOTDIR"/.plugins
 
 zsh_add_file() {
     [ -f "$1" ] && source "$1"
