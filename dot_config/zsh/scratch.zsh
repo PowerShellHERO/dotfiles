@@ -68,6 +68,7 @@ alias ds='chezmoi status | grep -v "^ R"'
 ##             :Alias
 ## ===============================
 
+alias pi=/home/linuxbrew/.linuxbrew/bin/python3
 alias ls=ls\ --color=auto
 alias vi=nvim
 ### nvim を less 代わりに使う
