@@ -31,6 +31,7 @@ update-locale LANG=en_US.UTF-8
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 brew install -y \
+    python3 \
     fd \
     rg \
     bat \
