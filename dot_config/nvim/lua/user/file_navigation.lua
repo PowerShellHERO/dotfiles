@@ -5,22 +5,22 @@ local pathdir = {
     ---- lsp = '~/.config/nvim/lua/plugins/lsp',
     o = '~/.config/nvim/lua/',
     dot = '~/.local/share/chezmoi',
+    cheatsheet = '~/tes/TeckStack/nvim/cheatsheet',
     current_dir = '',
 }
 
 local make_changedir_cmd = function(path)
-    ---- ":cd " は ":cd %:h" と同じ。path が 'current_dir' ならこれを返す
-    local path = vim.fn.trim(path)
+    local path = path or vim.fn.trim(path)
     return ('cd ' .. pathdir[path])
 end
 
 local M = {}
 
 M.findfiles = function(path)
-    local cd = make_changedir_cmd(path)
-
-    ---- print(cd)
-    vim.cmd(cd)
+    if path ~= 'current_dir' then
+        local cd = make_changedir_cmd(path)
+        vim.cmd(cd)
+    end
     vim.cmd('Telescope find_files')
 end
 
@@ -43,8 +43,9 @@ M.setup = function()
         end,
     })
 
-    vim.cmd('cabbr ff  <ESC>:Findfiles')
+    vim.cmd('cabbr ff   <ESC>:Findfiles')
     vim.cmd('cabbr ffo  <ESC>:Findfiles o')
+    vim.cmd('cabbr ffc  <ESC>:Findfiles cheatsheet')
 
     -- この好みの問題でこの書き方はしない
     -- <cmd> で始める場合は<CR> が必要になる。
