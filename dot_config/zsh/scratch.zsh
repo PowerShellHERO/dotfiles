@@ -403,6 +403,10 @@ function :a {
 }
 
 function :t {
+    if [[ "$2" -eq "s" ]]; then
+        open_session Scratch "$HOME/tes/scratch/"
+        return 0
+    fi
     open_session ToDo "$HOME/tes/"
 }
 
