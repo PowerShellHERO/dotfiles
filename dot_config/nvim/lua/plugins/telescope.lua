@@ -25,6 +25,9 @@ return {
         telescope.setup({
             defaults = {
                 find_command = { 'fd', '--type', 'f', '--strip-cwd-prefix', '--hidden', '--exclude', '.*', '--exclude', '_*' },
+                -- 順序: { 上, 右, 下, 左, 左上, 右上, 右下, 左下 }
+                -- def: borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+                borderchars = { "=", "│", "=", "│", "╭", "╮", "╯", "╰" },
 
                 -- Default configuration for telescope goes here:
                 -- config_key = value,
