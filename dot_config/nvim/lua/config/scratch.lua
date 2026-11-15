@@ -218,3 +218,23 @@ vim.api.nvim_create_autocmd('CmdlineLeave', {
   end,
 })
 
+
+-- 2文字幅で扱いたい wide font (terminal 側も設定が必要)
+vim.fn.setcellwidths({
+    { 0x2015, 0x2015, 2 }, -- ―
+    { 0x25CF, 0x25CF, 2 }, -- ●
+    { 0x2026, 0x2026, 2 }, -- …
+    { 0x203B, 0x203B, 2 }, -- ※
+})
+
+--[[
+-- 調べ方。 print(string.format("U+%04X", vim.fn.char2nr("―")))
+-- このまま設定できるとは思うが……。
+
+local chars = { "―", "●", "…", "※" }
+for _, char in ipairs(chars) do
+    code = string.format("U+%04X", vim.fn.char2nr(char))
+    print(char, code)
+end
+
+--]]
