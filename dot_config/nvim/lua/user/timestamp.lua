@@ -51,7 +51,7 @@ vim.api.nvim_create_user_command('Timestamp', function()
 
     -- buffer 内の余計な空行を削除 (3連続以上)
     --- vim.cmd([[<Cmd>%s/^\n\{3,}/\r\r/g<CR>]])
-    vim.cmd[[%s/^\n\{3,}/\r\r/ge]]
+    vim.cmd[[keeppatterns  %s/^\n\{3,}/\r\r/ge]]
     vim.cmd([[normal! Gzz]])
 
 end, {})
