@@ -24,8 +24,9 @@ require('config.scratch')
 require('config.lazy')
 
 -- users
-require('user.file_navigation').setup()
 require('config.wsl')
+require('user.file_navigation').setup()
+require('user.timestamp')
 
 -- abbreviations {{{
 
