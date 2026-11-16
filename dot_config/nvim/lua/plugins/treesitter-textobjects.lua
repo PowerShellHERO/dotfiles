@@ -21,6 +21,13 @@ return {
             select = {
                 -- Automatically jump forward to textobj, similar to targets.vim
                 lookahead = true,
+                -- keymaps = {
+                --     ["am"] = "@functoin.outer",
+                --     ["im"] = "@functoin.inner",
+                --     ["ac"] = "@class.outer",
+                --     ["ic"] = "@class.inner",
+                --     ["as"] = "@local.scope",
+                -- },
                 -- You can choose the select mode (default is charwise 'v')
                 --
                 -- Can also be a function which gets passed a table with the keys
@@ -45,7 +52,8 @@ return {
                 include_surrounding_whitespace = false,
             },
         }
-        -- keymaps
+        -- 上の短縮版の設定じゃなくて，こう設定してる理由があるみたい。
+        -- 単純に設定が反映されない。
         -- You can use the capture groups defined in `textobjects.scm`
         vim.keymap.set({ "x", "o" }, "am", function()
             require "nvim-treesitter-textobjects.select".select_textobject("@function.outer", "textobjects")
