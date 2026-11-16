@@ -68,6 +68,7 @@ alias ds='chezmoi status | grep -v "^ R"'
 ##             :Alias
 ## ===============================
 
+alias .='cd ..'
 alias pi=/home/linuxbrew/.linuxbrew/bin/python3
 alias ls=ls\ --color=auto
 alias vi=nvim
