@@ -22,11 +22,11 @@ return {
                 -- Automatically jump forward to textobj, similar to targets.vim
                 lookahead = true,
                 -- keymaps = {
-                --     ["am"] = "@functoin.outer",
-                --     ["im"] = "@functoin.inner",
-                --     ["ac"] = "@class.outer",
-                --     ["ic"] = "@class.inner",
-                --     ["as"] = "@local.scope",
+                --     ["am"] = { query = "@functoin.outer"},
+                --     ["im"] = { query = "@functoin.inner"},
+                --     ["ac"] = { query = "@class.outer"},
+                --     ["ic"] = { query = "@class.inner"},
+                --     ["as"] = { query = "@local.scope"},
                 -- },
                 -- You can choose the select mode (default is charwise 'v')
                 --
