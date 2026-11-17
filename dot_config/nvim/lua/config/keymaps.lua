@@ -118,6 +118,15 @@ vim.keymap.set('o', ',', function()
     move_to(',.，、。')
 end, { desc = 'move to ,/./，/。/、' })
 
+vim.keymap.set('n', 'f.', function()
+    move_to('.。')
+end)
+
+vim.keymap.set('n', 'f,', function()
+    move_to(',，')
+end)
+
+
 vim.cmd([[
 " KILL {
 
