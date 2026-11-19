@@ -168,6 +168,27 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' '+m:{[:upper:]}=
 ##            Git
 ## =========================
 
+# diff
+d() {
+    if jj root 2> /dev/null; then
+        jj diff "$@"
+    elif git rev-parse --show-toplevel 2> /dev/null; then
+        git diff "$@"
+    else
+        echo "(nor .jj .git)"
+    fi
+}
+
+# diff name only
+dn() {
+    if jj diff --name-only 2> /dev/null; then
+        echo ':'
+    elif git status --short 2> /dev/null; then
+        echo ':'
+    else
+        echo "(nor .jj .git)"
+    fi
+}
 
 gitautocommit() {
     # Commit the most top change
