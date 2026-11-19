@@ -92,7 +92,10 @@ keymap('n', 'zr', 'zX', opts)
 keymap('i', '<C-v>', '<Esc>v', opts)
 keymap('n', 'vat', 'va<', opts)
 keymap('n', 'vit', 'vi<', opts)
-keymap('n', '<C-z>', ':e!<CR>', opts)
+keymap('n', '<C-z>', function()
+    vim.cmd('edit!')
+    vim.cmd('normal! zz')
+end, opts)
 keymap('n', 'A', ':%y<CR>', opts)
 -- keymap('i', '<C-t>', '<Esc>ea', opts) -- used Tmux Leader Key
 keymap('n', '<C-e>', 'xhep', opts)
@@ -172,7 +175,7 @@ inoremap <C-b> <C-o>b
 inoremap <C-f> <C-o>w
 
 " （最後の保存か）バッファが開かれた時の状態に戻す。undo 可能
-nnoremap <C-z> :e!<CR>
+" nnoremap <C-z> :e!<CR>
 
 " USABILITY (なんか挙動がおかしいので，vim.cmd で設定)
 nnoremap ; :
