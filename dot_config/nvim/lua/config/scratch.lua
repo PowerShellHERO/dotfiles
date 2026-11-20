@@ -184,40 +184,6 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
--- abbreviations for search
--- *   一文字で検索するわけないんだから，代わりに別のものを検索する。
--- *   でも cabbr を使うのも危険な気がする
--- *   比較的安全そうな方法で実装
--- search
-local g_search_aliases = {
-  t = 'TODO',
-  -- 複数候補は正規表現の OR にする
-  -- ただし，filetype ごとに設定した方がいいと思う。
-  f = [[function\|def\>]],
-  h = '^## ',
-}
-
--- local aliases
--- after/ftplugin に `vim.b.search_aliases = []`
--- という定義を持っていれば filetype ごとに追加。
-
-vim.api.nvim_create_autocmd('CmdlineLeave', {
-  pattern = { '/', '?' },
-  callback = function()
-    -- <Esc> でキャンセルした場合は何もしない
-    if vim.v.event.abort then return end
-
-    local line = vim.fn.getcmdline()
-
-    -- buffer-local を優先し、無ければグローバルを使う
-    local local_aliases = vim.b.search_aliases or {}
-    local repl = local_aliases[line] or g_search_aliases[line]
-    if repl then
-      vim.fn.setcmdline(repl)
-    end
-  end,
-})
-
 
 -- 2文字幅で扱いたい wide font (terminal 側も設定が必要)
 vim.fn.setcellwidths({
@@ -238,3 +204,7 @@ for _, char in ipairs(chars) do
 end
 
 --]]
+
+local gemini_post = vim.fn.expand("$HOME/tes/scratch/post/")
+vim.opt.path:append(gemini_post .. "**")
+
