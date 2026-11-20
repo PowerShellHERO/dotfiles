@@ -32,8 +32,10 @@ zsh_add_file() { [ -f "$1" ] && source "$1" }
 zsh_add_file "$ZDOTDIR"     ## for gf コメントアウトしてないけど何も起こりません
 zsh_add_file "$ZDOTDIR/zsh-functions.zsh"
 zsh_add_file "$ZDOTDIR/wsl.zsh"
+zsh_add_file "$ZDOTDIR/secrets/api_keys.sh"
 zsh_add_file "$ZDOTDIR/keymap.zsh"
 zsh_add_file "$ZDOTDIR/scratch.zsh"
+
 
 ## =========================
 ##          Pluings
