@@ -2,7 +2,7 @@
 
 　選択範囲(一行目のみ) か，現在行を google で検索。
 
-chrome ダークモード
+require('user.google')
 
 --]]
 
