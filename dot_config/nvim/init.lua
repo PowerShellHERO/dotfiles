@@ -27,6 +27,7 @@ require('config.lazy')
 require('config.wsl')
 require('user.file_navigation').setup()
 require('user.timestamp')
+require('user.google')
 require('user.cabbr_expansion')
 
 -- abbreviations {{{
