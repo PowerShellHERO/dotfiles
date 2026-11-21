@@ -21,7 +21,6 @@ _G.set_search_alias(search_aliases)
 
 --]]
 
-
 local function cabbrev(lhs, rhs)
     vim.keymap.set('ca', lhs, function()
         if vim.fn.getcmdtype() == ':'
@@ -61,27 +60,6 @@ local function set_cmd_alias(t)
 end
 
 
--- ftplugin から呼んで設定。
+-- ftplugin かどこかから呼んで設定。
 _G.set_cmd_alias    = set_cmd_alias
 _G.set_search_alias = set_search_alias
-
--- buffer local の abbr が global より優先されるため上書き可能
--- まぁ M で set_alias とかを提供した方がいいとは思うが。
-
-
-local cmd_aliases = {
-    meta = 'Meta',
-    memo = 'Memo',
-    ask  = 'Ask'
-}
-
-local search_aliases = {
-  t = 'TODO',
-  f = [[function\|def\>]],
-  h = '^## ',
-}
-
--- set
-_G.set_cmd_alias(cmd_aliases)
-_G.set_search_alias(search_aliases)
-
