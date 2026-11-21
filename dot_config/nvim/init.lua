@@ -31,16 +31,27 @@ require('user.cabbr_expansion')
 
 -- abbreviations {{{
 
-vim.cmd([[
-" iabbr nvim Neovim
-cabbr add !chezmoi add %
-cabbr ya %y
-cabbr grep <Cmd>Telescope live_grep<CR>
-" :Telescope oldfiles'
-cabbr nof <Cmd>Telescope oldfiles<CR>
-" :cd this directory
-cabbr cdp <Cmd>cd %:p:h<CR>
-]])
+local cmd_aliases = {
+    meta = 'Meta',
+    memo = 'Memo',
+    ask  = 'Ask',
+    add  = '!chezmoi add %',
+    ya   = '%y',
+    grep = 'Telescope live_grep',
+    nof  = 'Telescope oldfiles',
+    cdp  = 'cd %:p:h',
+}
+
+local search_aliases = {
+  t = 'TODO',
+  f = [[function\|def\>]],
+  h = '^## ',
+}
+
+-- set
+_G.set_cmd_alias(cmd_aliases)
+_G.set_search_alias(search_aliases)
+
 
 -- }}}
 --
