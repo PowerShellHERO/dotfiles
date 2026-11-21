@@ -212,3 +212,18 @@ keymap('n', 'go', function()
     -- 'go', 'gO' だとダメぽ
     vim.cmd('normal gO')
 end, opts) -- show outline
+
+-- motion, operator
+-- (cia), (argument) caa は小指が辛いけど，ほぼ使わない
+vim.keymap.set("o", "ia", "i(", { remap = true })
+vim.keymap.set("o", "aa", "a(", { remap = true })
+
+-- <cat> del placeholder
+vim.keymap.set("n", "cat", function()
+    local pos = vim.fn.search("<cat>", "W")
+    if pos == 0 then
+        return
+    end
+
+    vim.cmd("normal! ca<")
+end, { desc = "Change next <cat>" })

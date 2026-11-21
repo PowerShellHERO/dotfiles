@@ -208,3 +208,14 @@ end
 local gemini_post = vim.fn.expand("$HOME/tes/scratch/post/")
 vim.opt.path:append(gemini_post .. "**")
 
+--- Insert YAML
+vim.api.nvim_create_user_command('Meta', function()
+  if vim.api.nvim_buf_get_lines(0, 0, 1, false)[1] == '---' then
+    return
+  end
+  vim.api.nvim_buf_set_lines(0, 0, 0, false, {
+    '---',
+    'date: ' .. os.date('%Y-%m-%d %H:%M:%S'),
+    '---',
+  })
+end, {})
