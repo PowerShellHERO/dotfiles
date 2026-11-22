@@ -219,3 +219,30 @@ vim.api.nvim_create_user_command('Meta', function()
     '---',
   })
 end, {})
+
+
+-- 削除関数
+-- そのまま p で移動も出来ます！
+vim.api.nvim_create_user_command("Remove", function()
+    local current_file = vim.fn.expand("%:t")
+    vim.fn.setreg('/', current_file)
+    local oil = require("oil")
+
+    -- コールバック関数で呼ぶ
+    oil.open(nil, nil, function()
+        local pos = vim.fn.search(current_file, "W")
+        if pos == 0 then
+            vim.notify("File not found: " .. current_file, vim.log.levels.WARN)
+            return
+        end
+
+        -- oil の描画を待ち切る
+        vim.defer_fn(function()
+            vim.cmd.normal({ "dd", bang = true })
+            -- oil.save({ confirm = false })
+            print('del: ' .. current_file)
+        end, 100)
+
+    end)
+end, { desc = "Remove current file with Oil" })
+
