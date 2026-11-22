@@ -41,6 +41,7 @@ local cmd_aliases = {
     grep = 'Telescope live_grep',
     nof  = 'Telescope oldfiles',
     cdp  = 'cd %:p:h',
+    remove = 'Remove',
 }
 
 local search_aliases = {
